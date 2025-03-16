@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:real_eye/core/utils/app_router.dart';
 
 void main() {
   runApp(const RealEye());
@@ -9,6 +10,10 @@ class RealEye extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.light(),
+      routerConfig: AppRouter.router,
+    );
   }
 }
