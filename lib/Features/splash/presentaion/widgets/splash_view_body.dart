@@ -11,10 +11,10 @@ class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
 
   @override
-  SplashViewBodyState createState() => SplashViewBodyState();
+  State<SplashViewBody> createState() => _SplashViewBodyState();
 }
 
-class SplashViewBodyState extends State<SplashViewBody> with SingleTickerProviderStateMixin {
+class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProviderStateMixin {
   double _opacity = 0.0;
   double _scale = 1.0;
   bool checkingConnection = true;
