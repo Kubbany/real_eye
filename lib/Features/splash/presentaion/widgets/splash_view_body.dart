@@ -17,114 +17,14 @@ class SplashViewBody extends StatefulWidget {
 class SplashViewBodyState extends State<SplashViewBody> with SingleTickerProviderStateMixin {
   double _opacity = 0.0;
   double _scale = 1.0;
-  bool _checkingConnection = true;
-  Timer? _connectionTimer;
+  bool checkingConnection = true;
+  Timer? connectionTimer;
 
   @override
   void initState() {
     super.initState();
-    _startAnimation();
-    _checkInternetRepeatedly();
-  }
-
-  void _startAnimation() {
-    Future.delayed(
-      const Duration(milliseconds: 500),
-      () {
-        if (!mounted) return;
-
-        setState(() {
-          _opacity = 1.0;
-          _scale = 1.2;
-        });
-
-        Future.delayed(
-          const Duration(seconds: 2),
-          () {
-            if (!mounted) return;
-
-            setState(() {
-              _opacity = 0.0;
-              _scale = 1.0;
-            });
-
-            Future.delayed(
-              const Duration(seconds: 2),
-              () {
-                if (_checkingConnection) {
-                  _startAnimation(); // Restart animation if still checking
-                }
-              },
-            );
-          },
-        );
-      },
-    );
-  }
-
-  void _checkInternetRepeatedly() {
-    int attempts = 0;
-    const int maxAttempts = 30; // 30 seconds check
-
-    _connectionTimer = Timer.periodic(const Duration(seconds: 1), (timer) async {
-      attempts++;
-
-      final result = await Connectivity().checkConnectivity();
-      if (result.first != ConnectivityResult.none) {
-        _navigateToNextScreen();
-        timer.cancel();
-      } else if (attempts >= maxAttempts) {
-        timer.cancel();
-        _showNoInternetDialog();
-      }
-    });
-  }
-
-  void _showNoInternetDialog() {
-    if (!mounted) return;
-
-    _checkingConnection = false; // Stop checking
-    _connectionTimer?.cancel(); // Ensure timer is canceled
-
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        title: const Text("No Internet Connection"),
-        content: const Text("Please check your internet connection and try again."),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              setState(() {
-                _checkingConnection = true;
-                _startAnimation();
-                _checkInternetRepeatedly();
-              });
-            },
-            child: const Text("Try Again"),
-          ),
-          TextButton(
-            onPressed: () => exit(0),
-            child: const Text("Cancel"),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _navigateToNextScreen() async {
-    if (!mounted) return;
-
-    _checkingConnection = false; // Stop checking
-    _connectionTimer?.cancel(); // Ensure timer is canceled
-
-    await Future.delayed(
-      const Duration(seconds: 2),
-    );
-    if (mounted) {
-      GoRouter.of(context).go(AppRouter.kHomeView);
-    }
+    startAnimation();
+    checkInternetRepeatedly();
   }
 
   @override
@@ -165,9 +65,121 @@ class SplashViewBodyState extends State<SplashViewBody> with SingleTickerProvide
     );
   }
 
+  void startAnimation() {
+    Future.delayed(
+      const Duration(milliseconds: 500),
+      () {
+        if (!mounted) {
+          return;
+        }
+
+        setState(
+          () {
+            _opacity = 1.0;
+            _scale = 1.2;
+          },
+        );
+
+        Future.delayed(
+          const Duration(seconds: 2),
+          () {
+            if (!mounted) {
+              return;
+            }
+
+            setState(
+              () {
+                _opacity = 0.0;
+                _scale = 1.0;
+              },
+            );
+
+            Future.delayed(
+              const Duration(seconds: 2),
+              () {
+                if (checkingConnection) {
+                  startAnimation(); // Restart animation if still checking
+                }
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void checkInternetRepeatedly() {
+    int attempts = 0;
+    const int maxAttempts = 30; // 30 seconds check
+
+    connectionTimer = Timer.periodic(const Duration(seconds: 1), (timer) async {
+      attempts++;
+
+      final result = await Connectivity().checkConnectivity();
+      if (result.first != ConnectivityResult.none) {
+        navigateToNextScreen();
+        timer.cancel();
+      } else if (attempts >= maxAttempts) {
+        timer.cancel();
+        showNoInternetDialog();
+      }
+    });
+  }
+
+  void showNoInternetDialog() {
+    if (!mounted) return;
+
+    checkingConnection = false; // Stop checking
+    connectionTimer?.cancel(); // Ensure timer is canceled
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        title: const Text("No Internet Connection"),
+        content: const Text("Please check your internet connection and try again."),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              setState(
+                () {
+                  checkingConnection = true;
+                  startAnimation();
+                  checkInternetRepeatedly();
+                },
+              );
+            },
+            child: const Text("Try Again"),
+          ),
+          TextButton(
+            onPressed: () => exit(0),
+            child: const Text("Cancel"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void navigateToNextScreen() async {
+    if (!mounted) {
+      return;
+    }
+
+    checkingConnection = false; // Stop checking
+    connectionTimer?.cancel(); // Ensure timer is canceled
+
+    await Future.delayed(
+      const Duration(seconds: 2),
+    );
+    if (mounted) {
+      GoRouter.of(context).go(AppRouter.kHomeView);
+    }
+  }
+
   @override
   void dispose() {
-    _connectionTimer?.cancel();
+    connectionTimer?.cancel();
     super.dispose();
   }
 }
