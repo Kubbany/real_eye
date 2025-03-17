@@ -17,6 +17,12 @@ class RealEye extends StatelessWidget {
         textTheme: GoogleFonts.robotoTextTheme(
           ThemeData.light().textTheme,
         ),
+        appBarTheme: const AppBarTheme(
+          color: Colors.black,
+          iconTheme: IconThemeData(
+            color: Colors.white,
+          ),
+        ),
       ),
       routerConfig: AppRouter.router,
     );

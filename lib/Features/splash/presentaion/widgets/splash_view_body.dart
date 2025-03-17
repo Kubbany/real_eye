@@ -110,7 +110,7 @@ class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProvid
 
   void checkInternetRepeatedly() {
     int attempts = 0;
-    const int maxAttempts = 30; // 30 seconds check
+    const int maxAttempts = 45; // 30 seconds check
 
     connectionTimer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       attempts++;

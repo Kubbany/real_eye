@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_eye/Features/authentication/presentation/views/login_view.dart';
 import 'package:real_eye/Features/splash/presentaion/views/splash_view.dart';
+import 'package:real_eye/features/home/presentation/views/home_view.dart';
 
 abstract class AppRouter {
   static const kLoginView = "/loginView";
@@ -42,7 +43,7 @@ abstract class AppRouter {
         path: kHomeView,
         pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
-          child: const LoginView(),
+          child: const HomeView(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             const begin = Offset(0.0, 1.0); // Start from bottom
             const end = Offset.zero; // End at normal position
