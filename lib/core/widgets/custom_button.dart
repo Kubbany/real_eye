@@ -5,7 +5,7 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.title,
     required this.onPressed,
-    required this.borderColor,
+    this.borderColor,
     this.titleColor,
     required this.borderRadius,
     required this.backgroundColor,
@@ -14,7 +14,7 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String title;
   final Color backgroundColor;
-  final Color borderColor;
+  final Color? borderColor;
   final Color? titleColor;
   final double borderRadius;
 
@@ -24,10 +24,12 @@ class CustomButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: backgroundColor,
         shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: borderColor,
-            width: 2.5,
-          ),
+          side: borderColor != null
+              ? BorderSide(
+                  color: borderColor!,
+                  width: 2.5,
+                )
+              : BorderSide.none,
           borderRadius: BorderRadius.all(
             Radius.circular(borderRadius),
           ),
