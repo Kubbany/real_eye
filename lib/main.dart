@@ -13,9 +13,10 @@ class RealEye extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light().copyWith(
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: Colors.black,
         textTheme: GoogleFonts.robotoTextTheme(
-          ThemeData.light().textTheme,
+          ThemeData.dark().textTheme,
         ),
         appBarTheme: const AppBarTheme(
           color: Colors.black,
