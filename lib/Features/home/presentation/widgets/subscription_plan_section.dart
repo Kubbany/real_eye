@@ -40,6 +40,9 @@ class SubscriptionPlanSection extends StatelessWidget {
         SubscriptionPlans(
           plans: plans,
         ),
+        SizedBox(
+          height: 20,
+        ),
       ],
     );
   }
