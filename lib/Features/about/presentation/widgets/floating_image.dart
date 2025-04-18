@@ -9,7 +9,9 @@ class FloatingImage extends StatefulWidget {
     super.key,
     required this.child,
     this.floatRange = 10.0,
-    this.duration = const Duration(seconds: 3),
+    this.duration = const Duration(
+      milliseconds: 2300,
+    ),
   });
 
   @override
