@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:real_eye/Features/about/presentation/widgets/about_us_section.dart';
 import 'package:real_eye/Features/about/presentation/widgets/floating_image.dart';
 import 'package:real_eye/Features/about/presentation/widgets/how_it_works_section.dart';
+import 'package:real_eye/Features/about/presentation/widgets/meet_our_team_section.dart';
 import 'package:real_eye/Features/about/presentation/widgets/our_mission_section.dart';
 import 'package:real_eye/core/utils/app_images.dart';
 import 'package:real_eye/core/widgets/custom_app_bar.dart';
@@ -30,6 +31,9 @@ class AboutUsViewBody extends StatelessWidget {
               ),
               SliverToBoxAdapter(
                 child: HowItWorksSection(),
+              ),
+              SliverToBoxAdapter(
+                child: MeetOurTeamSection(),
               ),
             ],
           ),
