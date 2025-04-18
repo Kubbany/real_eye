@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:real_eye/Features/about/presentation/widgets/about_us_section.dart';
+import 'package:real_eye/Features/about/presentation/widgets/our_mission_section.dart';
 import 'package:real_eye/core/widgets/custom_app_bar.dart';
 
 class AboutUsViewBody extends StatelessWidget {
@@ -15,6 +16,9 @@ class AboutUsViewBody extends StatelessWidget {
             slivers: [
               SliverToBoxAdapter(
                 child: AboutUsSection(),
+              ),
+              SliverToBoxAdapter(
+                child: OurMissionSection(),
               ),
             ],
           ),
