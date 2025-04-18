@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:real_eye/core/utils/app_router.dart';
 
 void main() {
@@ -15,9 +14,6 @@ class RealEye extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Colors.black,
-        textTheme: GoogleFonts.robotoTextTheme(
-          ThemeData.dark().textTheme,
-        ),
         appBarTheme: const AppBarTheme(
           color: Colors.black,
           iconTheme: IconThemeData(
