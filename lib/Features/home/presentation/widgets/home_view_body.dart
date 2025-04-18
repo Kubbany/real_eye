@@ -10,25 +10,38 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: <Widget>[
-        CustomAppBar(),
+        const CustomAppBar(),
         Expanded(
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: FreeTrialSection(),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.black,
+                  Colors.grey.shade900,
+                  Colors.black,
+                ],
               ),
-              SliverToBoxAdapter(
-                child: DeepFakeFrameSection(),
-              ),
-              SliverToBoxAdapter(
-                child: DescriptionSection(),
-              ),
-              SliverToBoxAdapter(
-                child: SubscriptionPlanSection(),
-              ),
-            ],
+            ),
+            child: const CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: FreeTrialSection(),
+                ),
+                SliverToBoxAdapter(
+                  child: DeepFakeFrameSection(),
+                ),
+                SliverToBoxAdapter(
+                  child: DescriptionSection(),
+                ),
+                SliverToBoxAdapter(
+                  child: SubscriptionPlanSection(),
+                ),
+              ],
+            ),
           ),
         ),
       ],
