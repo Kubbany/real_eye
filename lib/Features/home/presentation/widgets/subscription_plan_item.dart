@@ -25,6 +25,7 @@ class SubscriptionPlanItem extends StatelessWidget {
         color: Colors.black,
         boxShadow: const [
           BoxShadow(
+            blurRadius: 2,
             color: Colors.white,
           ),
         ],
