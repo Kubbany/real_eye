@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:real_eye/Features/about/domain/entities/team_member_entity.dart';
-import 'package:real_eye/Features/about/presentation/widgets/custom_avatar.dart';
+import 'package:real_eye/Features/about_us/domain/entities/team_member_entity.dart';
+import 'package:real_eye/Features/about_us/presentation/widgets/custom_avatar.dart';
 
 class TeamMemberItem extends StatelessWidget {
   const TeamMemberItem({super.key, required this.member});

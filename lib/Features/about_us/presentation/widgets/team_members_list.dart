@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:real_eye/Features/about/domain/entities/team_member_entity.dart';
-import 'package:real_eye/Features/about/presentation/widgets/team_member_item.dart';
+import 'package:real_eye/Features/about_us/domain/entities/team_member_entity.dart';
+import 'package:real_eye/Features/about_us/presentation/widgets/team_member_item.dart';
 import 'package:real_eye/core/utils/app_images.dart';
 
 class TeamMembersList extends StatelessWidget {

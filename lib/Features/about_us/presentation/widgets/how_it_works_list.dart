@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:real_eye/Features/about/domain/entities/how_it_work_entity.dart';
-import 'package:real_eye/Features/about/presentation/widgets/how_it_works_item.dart';
+import 'package:real_eye/Features/about_us/domain/entities/how_it_work_entity.dart';
+import 'package:real_eye/Features/about_us/presentation/widgets/how_it_works_item.dart';
 
 class HowItWorksList extends StatelessWidget {
   const HowItWorksList({super.key});

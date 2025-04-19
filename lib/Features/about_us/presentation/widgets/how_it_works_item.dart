@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:real_eye/Features/about/domain/entities/how_it_work_entity.dart';
+import 'package:real_eye/Features/about_us/domain/entities/how_it_work_entity.dart';
 
 class HowItWorksItem extends StatelessWidget {
   const HowItWorksItem({
