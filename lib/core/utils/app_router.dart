@@ -13,7 +13,6 @@ abstract class AppRouter {
   static const kDeepFakeDetectionView = "/deepFakeDetectionView";
   static const kAboutUsView = "/aboutUsView";
   static const kContactUsView = "/contactUsView";
-  static const kDetectDeepFakeView = "/detectDeepFakeView";
   static const kKnowledgeCenterView = "/knowledgeCenterView";
   static const kFAQView = "/fAQView";
   static final router = GoRouter(
@@ -24,80 +23,42 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kLoginView,
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: const LoginView(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(0.0, 1.0); // Start from bottom
-            const end = Offset.zero; // End at normal position
-            const curve = Curves.easeInOut;
-
-            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-            return SlideTransition(
-              position: animation.drive(tween),
-              child: child,
-            );
-          },
-        ),
+        pageBuilder: (context, state) => slidingNavigation(state, const LoginView()),
       ),
       GoRoute(
         path: kHomeView,
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: const HomeView(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(0.0, 1.0); // Start from bottom
-            const end = Offset.zero; // End at normal position
-            const curve = Curves.easeInOut;
-
-            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-            return SlideTransition(
-              position: animation.drive(tween),
-              child: child,
-            );
-          },
-        ),
+        pageBuilder: (context, state) => slidingNavigation(state, const HomeView()),
       ),
       GoRoute(
         path: kAboutUsView,
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: const AboutUsView(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(0.0, 1.0); // Start from bottom
-            const end = Offset.zero; // End at normal position
-            const curve = Curves.easeInOut;
-
-            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-            return SlideTransition(
-              position: animation.drive(tween),
-              child: child,
-            );
-          },
+        pageBuilder: (context, state) => slidingNavigation(
+          state,
+          const AboutUsView(),
         ),
       ),
       GoRoute(
         path: kDeepFakeDetectionView,
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: const DeepfakeDetectionView(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(0.0, 1.0); // Start from bottom
-            const end = Offset.zero; // End at normal position
-            const curve = Curves.easeInOut;
-
-            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-            return SlideTransition(
-              position: animation.drive(tween),
-              child: child,
-            );
-          },
-        ),
+        pageBuilder: (context, state) => slidingNavigation(state, const DeepfakeDetectionView()),
       ),
     ],
   );
+
+  static CustomTransitionPage<dynamic> slidingNavigation(GoRouterState state, Widget view) {
+    return CustomTransitionPage(
+      key: state.pageKey,
+      child: view,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0); // Start from bottom
+        const end = Offset.zero; // End at normal position
+        const curve = Curves.easeInOut;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
 }
