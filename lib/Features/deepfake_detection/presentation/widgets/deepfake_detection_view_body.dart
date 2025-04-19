@@ -3,7 +3,8 @@ import 'package:real_eye/Features/deepfake_detection/presentation/widgets/deepfa
 import 'package:real_eye/Features/deepfake_detection/presentation/widgets/deepfake_frame.dart';
 import 'package:real_eye/Features/deepfake_detection/presentation/widgets/titles_section.dart';
 import 'package:real_eye/core/utils/app_images.dart';
-import 'package:real_eye/core/widgets/custom_app_bar.dart';
+import 'package:real_eye/core/utils/methods/get_gradient_decoration.dart';
+import 'package:real_eye/core/widgets/pinned_app_bar.dart';
 
 class DeepfakeDetectionViewBody extends StatelessWidget {
   const DeepfakeDetectionViewBody({super.key});
@@ -14,17 +15,7 @@ class DeepfakeDetectionViewBody extends StatelessWidget {
       children: [
         Positioned.fill(
           child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.black,
-                  Colors.grey.shade900,
-                  Colors.black,
-                ],
-              ),
-            ),
+            decoration: getGradientDecoration(),
             child: const CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
@@ -50,12 +41,7 @@ class DeepfakeDetectionViewBody extends StatelessWidget {
             ),
           ),
         ),
-        const Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          child: CustomAppBar(),
-        ),
+        const PinnedAppBar(),
       ],
     );
   }
