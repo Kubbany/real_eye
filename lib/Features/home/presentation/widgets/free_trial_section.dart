@@ -18,7 +18,7 @@ class FreeTrialSection extends StatelessWidget {
         spacing: 30,
         children: [
           SizedBox(
-            height: 70,
+            height: 80,
           ),
           CustomHomeButton(),
           DetectionTitleSection(),

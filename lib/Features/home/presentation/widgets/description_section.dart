@@ -8,14 +8,13 @@ class DescriptionSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Padding(
-      padding: EdgeInsets.only(
-        left: 13,
-        right: 13,
-        top: 50,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 13),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          SizedBox(
+            height: 50,
+          ),
           Text(
             "The Ultimate",
             style: TextStyle(

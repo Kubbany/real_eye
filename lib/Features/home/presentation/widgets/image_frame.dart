@@ -13,11 +13,9 @@ class ImageFrame extends StatelessWidget {
           horizontal: MediaQuery.sizeOf(context).width * 0.25,
         ),
         decoration: BoxDecoration(
-          border: Border(
-            top: getBorderSide(),
-            bottom: getBorderSide(),
-            left: getBorderSide(),
-            right: getBorderSide(),
+          border: Border.all(
+            color: Colors.grey.shade900,
+            width: 16,
           ),
           borderRadius: const BorderRadius.all(
             Radius.circular(
@@ -32,9 +30,4 @@ class ImageFrame extends StatelessWidget {
       ),
     );
   }
-
-  BorderSide getBorderSide() => BorderSide(
-        color: Colors.grey.shade900,
-        width: 16,
-      );
 }

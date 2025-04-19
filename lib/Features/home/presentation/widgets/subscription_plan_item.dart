@@ -15,26 +15,7 @@ class SubscriptionPlanItem extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(16),
       width: double.infinity,
-      decoration: BoxDecoration(
-        border: Border(
-          top: getBorderSide(),
-          bottom: getBorderSide(),
-          left: getBorderSide(),
-          right: getBorderSide(),
-        ),
-        color: Colors.black,
-        boxShadow: const [
-          BoxShadow(
-            blurRadius: 2,
-            color: Colors.white,
-          ),
-        ],
-        borderRadius: const BorderRadius.all(
-          Radius.circular(
-            12,
-          ),
-        ),
-      ),
+      decoration: getPlanDecoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -49,10 +30,24 @@ class SubscriptionPlanItem extends StatelessWidget {
     );
   }
 
-  BorderSide getBorderSide() {
-    return const BorderSide(
-      color: Colors.grey,
-      width: 1,
+  BoxDecoration getPlanDecoration() {
+    return BoxDecoration(
+      border: Border.all(
+        color: Colors.grey,
+        width: 1,
+      ),
+      color: Colors.black,
+      boxShadow: const [
+        BoxShadow(
+          blurRadius: 2,
+          color: Colors.white,
+        ),
+      ],
+      borderRadius: const BorderRadius.all(
+        Radius.circular(
+          12,
+        ),
+      ),
     );
   }
 }
