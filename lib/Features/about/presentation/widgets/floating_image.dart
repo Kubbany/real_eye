@@ -34,18 +34,22 @@ class _FloatingImageState extends State<FloatingImage> with SingleTickerProvider
     _offsetAnimation = Tween<Offset>(
       begin: Offset.zero,
       end: Offset(0, -widget.floatRange / 100),
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOut,
+      ),
+    );
 
     _opacityAnimation = Tween<double>(
       begin: 1.0,
       end: 0.5, // Slight fade when floating up
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOut,
+      ),
+    );
   }
 
   @override
