@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:real_eye/Features/about/presentation/widgets/about_us_section.dart';
-import 'package:real_eye/Features/about/presentation/widgets/floating_image.dart';
-import 'package:real_eye/Features/about/presentation/widgets/how_it_works_section.dart';
-import 'package:real_eye/Features/about/presentation/widgets/meet_our_team_section.dart';
-import 'package:real_eye/Features/about/presentation/widgets/our_mission_section.dart';
+import 'package:real_eye/Features/deepfake_detection/presentation/widgets/deepfake_detection_actions.dart';
+import 'package:real_eye/Features/deepfake_detection/presentation/widgets/deepfake_frame.dart';
+import 'package:real_eye/Features/deepfake_detection/presentation/widgets/titles_section.dart';
 import 'package:real_eye/core/utils/app_images.dart';
 import 'package:real_eye/core/widgets/custom_app_bar.dart';
 
-class AboutUsViewBody extends StatelessWidget {
-  const AboutUsViewBody({super.key});
+class DeepfakeDetectionViewBody extends StatelessWidget {
+  const DeepfakeDetectionViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: <Widget>[
+      children: [
         Positioned.fill(
           child: Container(
             decoration: BoxDecoration(
@@ -32,24 +30,21 @@ class AboutUsViewBody extends StatelessWidget {
                 SliverToBoxAdapter(
                   child: SizedBox(
                     height: 85,
+                  ), // Reserve space for AppBar!
+                ),
+                SliverToBoxAdapter(
+                  child: TitlesSection(),
+                ),
+                SliverToBoxAdapter(
+                  child: DeepfakeDetectionActions(),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 25),
+                    child: DeepfakeFrame(
+                      image: Assets.imagesDeepfake,
+                    ),
                   ),
-                ),
-                SliverToBoxAdapter(
-                  child: AboutUsSection(),
-                ),
-                SliverToBoxAdapter(
-                  child: OurMissionSection(),
-                ),
-                SliverToBoxAdapter(
-                  child: FloatingImage(
-                    child: Assets.imagesNeural,
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: HowItWorksSection(),
-                ),
-                SliverToBoxAdapter(
-                  child: MeetOurTeamSection(),
                 ),
               ],
             ),

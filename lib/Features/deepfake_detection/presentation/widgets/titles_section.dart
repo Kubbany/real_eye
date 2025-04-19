@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:real_eye/Features/deepfake_detection/presentation/widgets/deepfake_descriptions.dart';
 import 'package:real_eye/core/widgets/gradient_about_us_header.dart';
 
-class AboutUsSection extends StatelessWidget {
-  const AboutUsSection({super.key});
+class TitlesSection extends StatelessWidget {
+  const TitlesSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,17 +14,18 @@ class AboutUsSection extends StatelessWidget {
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: 40,
+            height: 60,
           ),
           GradientHeader(
-            title: "About Us",
+            title: "Deepfake Detection",
+            giveHeight: true,
           ),
-          Text(
-            "Empowering truth in digital media. Our AI-Driven platform ensures authentecity by detecting deepfakes with cutting-edge technology",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 19,
-            ),
+          SizedBox(
+            height: 20,
+          ),
+          DeepfakeDescriptions(),
+          SizedBox(
+            height: 30,
           ),
         ],
       ),

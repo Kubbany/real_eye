@@ -10,10 +10,9 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: <Widget>[
-        const CustomAppBar(),
-        Expanded(
+        Positioned.fill(
           child: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -29,6 +28,11 @@ class HomeViewBody extends StatelessWidget {
             child: const CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 85,
+                  ),
+                ),
+                SliverToBoxAdapter(
                   child: FreeTrialSection(),
                 ),
                 SliverToBoxAdapter(
@@ -43,6 +47,12 @@ class HomeViewBody extends StatelessWidget {
               ],
             ),
           ),
+        ),
+        const Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          child: CustomAppBar(),
         ),
       ],
     );

@@ -4,8 +4,10 @@ class GradientHeader extends StatelessWidget {
   const GradientHeader({
     super.key,
     required this.title,
+    this.giveHeight = false,
   });
   final String title;
+  final bool giveHeight;
   @override
   Widget build(BuildContext context) {
     return ShaderMask(
@@ -20,6 +22,7 @@ class GradientHeader extends StatelessWidget {
         title,
         style: TextStyle(
           fontSize: 60,
+          height: giveHeight ? 1 : null,
           fontWeight: FontWeight.bold,
           color: Colors.white, // Required for ShaderMask to work
           shadows: [

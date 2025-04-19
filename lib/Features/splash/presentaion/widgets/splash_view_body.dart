@@ -29,37 +29,50 @@ class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: TweenAnimationBuilder(
-          duration: const Duration(seconds: 2),
-          tween: Tween<double>(begin: 1.0, end: _scale),
-          builder: (context, double scale, child) {
-            return AnimatedOpacity(
-              duration: const Duration(seconds: 2),
-              opacity: _opacity,
-              child: Transform.scale(
-                scale: scale,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text(
-                      "Welcome To RealEye",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.black,
+            Colors.grey.shade900,
+            Colors.black,
+          ],
+        ),
+      ),
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: TweenAnimationBuilder(
+            duration: const Duration(seconds: 2),
+            tween: Tween<double>(begin: 1.0, end: _scale),
+            builder: (context, double scale, child) {
+              return AnimatedOpacity(
+                duration: const Duration(seconds: 2),
+                opacity: _opacity,
+                child: Transform.scale(
+                  scale: scale,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Text(
+                        "Welcome To RealEye",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.sizeOf(context).width * 0.35,
-                      child: Image.asset(Assets.imagesSplashLogo),
-                    ),
-                  ],
+                      SizedBox(
+                        width: MediaQuery.sizeOf(context).width * 0.35,
+                        child: Image.asset(Assets.imagesSplashLogo),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );

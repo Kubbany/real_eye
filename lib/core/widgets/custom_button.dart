@@ -9,6 +9,9 @@ class CustomButton extends StatelessWidget {
     this.titleColor,
     required this.borderRadius,
     required this.backgroundColor,
+    this.titleSize,
+    this.buttonHeight,
+    this.borderSideWidth,
   });
 
   final VoidCallback onPressed;
@@ -17,17 +20,21 @@ class CustomButton extends StatelessWidget {
   final Color? borderColor;
   final Color? titleColor;
   final double borderRadius;
+  final double? titleSize;
+  final double? buttonHeight;
+  final double? borderSideWidth;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
+        minimumSize: buttonHeight == null ? null : Size(double.infinity, buttonHeight!),
         backgroundColor: backgroundColor,
         shape: RoundedRectangleBorder(
           side: borderColor != null
               ? BorderSide(
                   color: borderColor!,
-                  width: 2.5,
+                  width: borderSideWidth ?? 2.5,
                 )
               : BorderSide.none,
           borderRadius: BorderRadius.all(
@@ -38,8 +45,10 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         title,
+        textAlign: TextAlign.center,
         style: TextStyle(
           fontWeight: FontWeight.bold,
+          fontSize: titleSize,
           color: titleColor ?? Colors.white,
         ),
       ),
