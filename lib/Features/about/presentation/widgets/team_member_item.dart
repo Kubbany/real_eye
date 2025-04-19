@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:real_eye/Features/about/domain/entities/team_member_entity.dart';
+import 'package:real_eye/Features/about/presentation/widgets/custom_avatar.dart';
 
 class TeamMemberItem extends StatelessWidget {
   const TeamMemberItem({super.key, required this.member});
@@ -8,16 +9,7 @@ class TeamMemberItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        ClipOval(
-          child: SizedBox(
-            width: MediaQuery.sizeOf(context).width * 0.5, // Diameter
-            height: MediaQuery.sizeOf(context).width * 0.5,
-            child: Image.asset(
-              member.image,
-              fit: BoxFit.fill,
-            ),
-          ),
-        ),
+        CustomAvatar(memberImage: member.image),
         const SizedBox(
           height: 15,
         ),

@@ -15,7 +15,9 @@ class AboutUsSection extends StatelessWidget {
           SizedBox(
             height: 40,
           ),
-          GradientAboutUsHeader(),
+          GradientHeader(
+            title: "About Us",
+          ),
           Text(
             "Empowering truth in digital media. Our AI-Driven platform ensures authentecity by detecting deepfakes with cutting-edge technology",
             textAlign: TextAlign.center,

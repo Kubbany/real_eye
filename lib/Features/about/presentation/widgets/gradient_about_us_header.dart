@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-class GradientAboutUsHeader extends StatelessWidget {
-  const GradientAboutUsHeader({
+class GradientHeader extends StatelessWidget {
+  const GradientHeader({
     super.key,
+    required this.title,
   });
-
+  final String title;
   @override
   Widget build(BuildContext context) {
     return ShaderMask(
@@ -16,7 +17,7 @@ class GradientAboutUsHeader extends StatelessWidget {
         Rect.fromLTWH(0, 0, bounds.width, bounds.height),
       ),
       child: Text(
-        'About Us',
+        title,
         style: TextStyle(
           fontSize: 60,
           fontWeight: FontWeight.bold,
