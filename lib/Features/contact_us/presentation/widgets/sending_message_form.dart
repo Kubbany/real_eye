@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:real_eye/Features/contact_us/presentation/widgets/labeled_text_field.dart';
 import 'package:real_eye/core/utils/app_router.dart';
 import 'package:real_eye/core/widgets/custom_button.dart';
-import 'package:real_eye/core/widgets/custom_text_field.dart';
 
 class SendingMessageForm extends StatelessWidget {
   const SendingMessageForm({super.key});
@@ -13,31 +13,15 @@ class SendingMessageForm extends StatelessWidget {
       key: GlobalKey<FormState>(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 5,
+        spacing: 15,
         children: <Widget>[
-          const Text(
-            "Full Name",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
+          const LabeledTextField(
+            label: "Full Name",
+            hint: "Enter Your Name",
           ),
-          const SizedBox(),
-          const CustomTextField(
-            hintText: "Enter Your Name",
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Text(
-            "Email Address",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(),
-          CustomTextField(
+          LabeledTextField(
+            label: "Email Address",
+            hint: "Enter Your Email",
             keyboardType: TextInputType.emailAddress,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -49,21 +33,10 @@ class SendingMessageForm extends StatelessWidget {
               }
               return null;
             },
-            hintText: "Enter Your Email",
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Text(
-            "Message",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(),
-          const CustomTextField(
-            hintText: "Type Your Message...",
+          const LabeledTextField(
+            label: "Message",
+            hint: "Type Your Message...",
             verticalContentPadding: 90,
           ),
           const SizedBox(
