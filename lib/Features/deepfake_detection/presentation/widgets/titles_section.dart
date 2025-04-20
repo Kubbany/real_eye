@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:real_eye/Features/deepfake_detection/presentation/widgets/deepfake_descriptions.dart';
-import 'package:real_eye/core/widgets/gradient_about_us_header.dart';
+import 'package:real_eye/core/widgets/custom_gradient_header.dart';
 
 class TitlesSection extends StatelessWidget {
   const TitlesSection({super.key});
@@ -16,7 +16,7 @@ class TitlesSection extends StatelessWidget {
           SizedBox(
             height: 60,
           ),
-          GradientHeader(
+          CustomGradientHeader(
             title: "Deepfake Detection",
             giveHeight: true,
           ),

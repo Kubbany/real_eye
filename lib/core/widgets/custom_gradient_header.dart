@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class GradientHeader extends StatelessWidget {
-  const GradientHeader({
+class CustomGradientHeader extends StatelessWidget {
+  const CustomGradientHeader({
     super.key,
     required this.title,
     this.giveHeight = false,

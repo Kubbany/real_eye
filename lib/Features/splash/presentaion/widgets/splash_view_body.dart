@@ -1,12 +1,11 @@
 import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_eye/core/utils/app_images.dart';
 import 'package:real_eye/core/utils/app_router.dart';
 import 'package:real_eye/core/utils/methods/get_gradient_decoration.dart';
+import 'package:real_eye/core/widgets/custom_alert_dialog.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -142,28 +141,18 @@ class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProvid
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        title: const Text("No Internet Connection"),
-        content: const Text("Please check your internet connection and try again."),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              setState(
-                () {
-                  checkingConnection = true;
-                  startAnimation();
-                  checkInternetRepeatedly();
-                },
-              );
+      builder: (context) => CustomAlertDialog(
+        title: "No Internet Connection",
+        content: "Please check your internet connection and try again.",
+        onAgree: () {
+          setState(
+            () {
+              checkingConnection = true;
+              startAnimation();
+              checkInternetRepeatedly();
             },
-            child: const Text("Try Again"),
-          ),
-          TextButton(
-            onPressed: () => exit(0),
-            child: const Text("Cancel"),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
@@ -180,7 +169,7 @@ class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProvid
       const Duration(seconds: 2),
     );
     if (mounted) {
-      GoRouter.of(context).go(AppRouter.kDeepFakeDetectionView);
+      GoRouter.of(context).go(AppRouter.kContactUsView);
     }
   }
 
