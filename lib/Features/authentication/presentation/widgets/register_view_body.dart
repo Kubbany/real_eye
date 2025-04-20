@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:real_eye/Features/authentication/presentation/widgets/continue_with_list.dart';
-import 'package:real_eye/Features/authentication/presentation/widgets/sign_in_actions.dart';
+import 'package:real_eye/Features/authentication/presentation/widgets/sign_up_actions.dart';
 import 'package:real_eye/Features/contact_us/presentation/widgets/labeled_text_field.dart';
 import 'package:real_eye/core/utils/methods/get_gradient_decoration.dart';
 import 'package:real_eye/core/widgets/custom_button.dart';
 
-class LoginViewBody extends StatelessWidget {
-  const LoginViewBody({super.key});
+class RegisterViewBody extends StatelessWidget {
+  const RegisterViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class LoginViewBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text(
-                "Welcome Back",
+                "Create an Account",
                 style: TextStyle(
                   fontSize: 32,
                   color: Colors.white,
@@ -33,7 +33,7 @@ class LoginViewBody extends StatelessWidget {
                 height: 15,
               ),
               const Text(
-                "Sign In to Detect Deepfake Instantly",
+                "Join Us to Detect Deepfake Instantly",
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.grey,
@@ -41,6 +41,13 @@ class LoginViewBody extends StatelessWidget {
               ),
               const SizedBox(
                 height: 35,
+              ),
+              const LabeledTextField(
+                label: "Username",
+                hint: "Enter Your Username",
+              ),
+              const SizedBox(
+                height: 20,
               ),
               const LabeledTextField(
                 label: "Email Address",
@@ -55,22 +62,30 @@ class LoginViewBody extends StatelessWidget {
                 hint: "Enter Your Password",
               ),
               const SizedBox(
+                height: 20,
+              ),
+              const LabeledTextField(
+                label: "Confirm Password",
+                isPasswordField: true,
+                hint: "Confirm Your Password",
+              ),
+              const SizedBox(
                 height: 25,
               ),
               CustomButton(
-                title: "Sign In",
+                title: "Sign Up",
                 titleSize: 18,
                 buttonHeight: 50,
                 onPressed: () {},
                 borderRadius: 8,
                 backgroundColor: const Color(0xff264cf7),
               ),
-              const SignInActions(),
+              const SignUpActions(),
               const SizedBox(
                 height: 15,
               ),
               const Text(
-                "Continue With",
+                "Sign Up With",
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.white,

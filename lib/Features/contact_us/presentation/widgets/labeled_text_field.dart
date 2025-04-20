@@ -9,9 +9,11 @@ class LabeledTextField extends StatelessWidget {
     this.verticalContentPadding,
     this.keyboardType,
     this.validator,
+    this.isPasswordField = false,
   });
   final String label, hint;
   final double? verticalContentPadding;
+  final bool isPasswordField;
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
   @override
@@ -29,6 +31,8 @@ class LabeledTextField extends StatelessWidget {
         ),
         CustomTextField(
           keyboardType: keyboardType,
+          isPasswordField: isPasswordField,
+          fillColor: Colors.grey[800],
           validator: validator,
           hintText: hint,
           verticalContentPadding: verticalContentPadding,

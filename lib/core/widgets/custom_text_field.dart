@@ -9,9 +9,11 @@ class CustomTextField extends StatefulWidget {
     this.textEditingController,
     this.validator,
     this.verticalContentPadding,
+    this.fillColor,
   });
   final String hintText;
   final bool isPasswordField;
+  final Color? fillColor;
   final double? verticalContentPadding;
   final TextEditingController? textEditingController;
   final TextInputType? keyboardType;
@@ -39,7 +41,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       textAlignVertical: widget.verticalContentPadding == null ? null : TextAlignVertical.top,
       decoration: InputDecoration(
         filled: true,
-        fillColor: const Color(0xff101825),
+        fillColor: widget.fillColor ?? const Color(0xff101825),
         contentPadding: EdgeInsets.only(
           top: 12,
           left: 16,

@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:real_eye/core/utils/app_images.dart';
+import 'package:real_eye/core/utils/app_router.dart';
 import 'package:real_eye/core/widgets/custom_button.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -39,7 +41,11 @@ class CustomAppBar extends StatelessWidget {
               CustomButton(
                 title: "Get Started",
                 titleColor: Colors.white,
-                onPressed: () {},
+                onPressed: () {
+                  GoRouter.of(context).go(
+                    AppRouter.kLoginView,
+                  );
+                },
                 borderColor: Colors.blue,
                 borderRadius: 32,
                 backgroundColor: Colors.black,

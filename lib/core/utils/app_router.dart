@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_eye/Features/about_us/presentation/views/about_us_view.dart';
 import 'package:real_eye/Features/authentication/presentation/views/login_view.dart';
+import 'package:real_eye/Features/authentication/presentation/views/register_view.dart';
 import 'package:real_eye/Features/contact_us/presentation/views/contact_us_view.dart';
 import 'package:real_eye/Features/deepfake_detection/presentation/views/deepfake_detection_view.dart';
 import 'package:real_eye/Features/splash/presentaion/views/splash_view.dart';
@@ -27,6 +28,13 @@ abstract class AppRouter {
         pageBuilder: (context, state) => slidingNavigation(
           state,
           const LoginView(),
+        ),
+      ),
+      GoRoute(
+        path: kRegisterView,
+        pageBuilder: (context, state) => slidingNavigation(
+          state,
+          const RegisterView(),
         ),
       ),
       GoRoute(
