@@ -24,11 +24,17 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kLoginView,
-        pageBuilder: (context, state) => slidingNavigation(state, const LoginView()),
+        pageBuilder: (context, state) => slidingNavigation(
+          state,
+          const LoginView(),
+        ),
       ),
       GoRoute(
         path: kHomeView,
-        pageBuilder: (context, state) => slidingNavigation(state, const HomeView()),
+        pageBuilder: (context, state) => slidingNavigation(
+          state,
+          const HomeView(),
+        ),
       ),
       GoRoute(
         path: kAboutUsView,

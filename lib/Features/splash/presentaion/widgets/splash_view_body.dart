@@ -6,6 +6,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_eye/core/utils/app_images.dart';
 import 'package:real_eye/core/utils/app_router.dart';
+import 'package:real_eye/core/utils/methods/get_gradient_decoration.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -30,17 +31,7 @@ class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProvid
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Colors.black,
-            Colors.grey.shade900,
-            Colors.black,
-          ],
-        ),
-      ),
+      decoration: getGradientDecoration(),
       child: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -125,18 +116,21 @@ class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProvid
     int attempts = 0;
     const int maxAttempts = 45; // 30 seconds check
 
-    connectionTimer = Timer.periodic(const Duration(seconds: 1), (timer) async {
-      attempts++;
+    connectionTimer = Timer.periodic(
+      const Duration(seconds: 1),
+      (timer) async {
+        attempts++;
 
-      final result = await Connectivity().checkConnectivity();
-      if (result.first != ConnectivityResult.none) {
-        navigateToNextScreen();
-        timer.cancel();
-      } else if (attempts >= maxAttempts) {
-        timer.cancel();
-        showNoInternetDialog();
-      }
-    });
+        final result = await Connectivity().checkConnectivity();
+        if (result.first != ConnectivityResult.none) {
+          navigateToNextScreen();
+          timer.cancel();
+        } else if (attempts >= maxAttempts) {
+          timer.cancel();
+          showNoInternetDialog();
+        }
+      },
+    );
   }
 
   void showNoInternetDialog() {
@@ -186,7 +180,7 @@ class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProvid
       const Duration(seconds: 2),
     );
     if (mounted) {
-      GoRouter.of(context).go(AppRouter.kContactUsView);
+      GoRouter.of(context).go(AppRouter.kDeepFakeDetectionView);
     }
   }
 
