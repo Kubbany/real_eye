@@ -43,13 +43,20 @@ class CustomButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Text(
-        title,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: titleSize,
-          color: titleColor ?? Colors.white,
+      child: Padding(
+        padding: title.contains("Home")
+            ? const EdgeInsets.symmetric(
+                vertical: 15,
+              )
+            : EdgeInsets.zero,
+        child: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: titleSize,
+            color: titleColor ?? Colors.white,
+          ),
         ),
       ),
     );

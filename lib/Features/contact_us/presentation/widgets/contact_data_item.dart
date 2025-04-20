@@ -10,7 +10,10 @@ class ContactDataItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(contact.icon),
+      leading: Icon(
+        contact.icon,
+        color: contact.contactData.contains("@") ? null : Colors.red,
+      ),
       title: Text(
         contact.contactData,
       ),
