@@ -15,6 +15,7 @@ class AboutUsViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CustomGradientContainer(
       child: CustomScrollView(
+        physics: BouncingScrollPhysics(),
         slivers: [
           PreservedAppBarMargin(),
           SliverToBoxAdapter(

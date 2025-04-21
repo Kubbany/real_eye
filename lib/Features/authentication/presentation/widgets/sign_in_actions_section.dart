@@ -23,7 +23,7 @@ class SignInActionsSection extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            GoRouter.of(context).go(
+            GoRouter.of(context).pushReplacement(
               AppRouter.kRegisterView,
             );
           },

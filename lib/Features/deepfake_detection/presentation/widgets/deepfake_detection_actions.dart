@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:real_eye/core/utils/app_router.dart';
 import 'package:real_eye/core/widgets/custom_button.dart';
 
 class DeepfakeDetectionActions extends StatelessWidget {
@@ -18,7 +20,11 @@ class DeepfakeDetectionActions extends StatelessWidget {
               title: "Get Started",
               buttonHeight: 55,
               titleSize: 16,
-              onPressed: () {},
+              onPressed: () {
+                GoRouter.of(context).push(
+                  AppRouter.kLoginView,
+                );
+              },
               borderRadius: 64,
               backgroundColor: const Color(0xff224ef6),
             ),
