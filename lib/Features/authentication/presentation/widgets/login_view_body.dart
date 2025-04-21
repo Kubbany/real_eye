@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:real_eye/Features/authentication/presentation/widgets/continue_with_list.dart';
-import 'package:real_eye/Features/authentication/presentation/widgets/sign_in_actions.dart';
-import 'package:real_eye/Features/contact_us/presentation/widgets/labeled_text_field.dart';
+import 'package:real_eye/Features/authentication/presentation/widgets/auth_header.dart';
+import 'package:real_eye/Features/authentication/presentation/widgets/continue_with_section.dart';
+import 'package:real_eye/Features/authentication/presentation/widgets/sign_in_actions_section.dart';
+import 'package:real_eye/Features/authentication/presentation/widgets/sign_in_form_section.dart';
 import 'package:real_eye/core/utils/methods/get_gradient_decoration.dart';
-import 'package:real_eye/core/widgets/custom_button.dart';
 
 class LoginViewBody extends StatelessWidget {
   const LoginViewBody({super.key});
@@ -12,74 +12,31 @@ class LoginViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Container(
           padding: const EdgeInsets.symmetric(
             horizontal: 18,
           ),
           width: double.infinity,
           decoration: getGradientDecoration(),
-          child: Column(
+          child: const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text(
-                "Welcome Back",
-                style: TextStyle(
-                  fontSize: 32,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+              AuthHeaderSection(
+                header: "Welcome Back",
+                subtitle: "Sign In to Detect Deepfake Instantly",
               ),
-              const SizedBox(
-                height: 15,
-              ),
-              const Text(
-                "Sign In to Detect Deepfake Instantly",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
-              ),
-              const SizedBox(
+              SizedBox(
                 height: 35,
               ),
-              const LabeledTextField(
-                label: "Email Address",
-                hint: "Enter Your Email",
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const LabeledTextField(
-                label: "Password",
-                isPasswordField: true,
-                hint: "Enter Your Password",
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              CustomButton(
-                title: "Sign In",
-                titleSize: 18,
-                buttonHeight: 50,
-                onPressed: () {},
-                borderRadius: 8,
-                backgroundColor: const Color(0xff264cf7),
-              ),
-              const SignInActions(),
-              const SizedBox(
+              SignInFormSection(),
+              SignInActionsSection(),
+              SizedBox(
                 height: 15,
               ),
-              const Text(
-                "Continue With",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
+              ContinueWithSection(
+                title: "Continue With",
               ),
-              const SizedBox(
-                height: 25,
-              ),
-              const ContinueWithList(),
             ],
           ),
         ),

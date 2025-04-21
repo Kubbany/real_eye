@@ -42,7 +42,7 @@ class CustomAppBar extends StatelessWidget {
                 title: "Get Started",
                 titleColor: Colors.white,
                 onPressed: () {
-                  GoRouter.of(context).go(
+                  GoRouter.of(context).push(
                     AppRouter.kLoginView,
                   );
                 },

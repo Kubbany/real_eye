@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_eye/core/utils/app_router.dart';
 
-class SignUpActions extends StatelessWidget {
-  const SignUpActions({super.key});
+class SignInActionsSection extends StatelessWidget {
+  const SignInActionsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class SignUpActions extends StatelessWidget {
         TextButton(
           onPressed: () {},
           child: const Text(
-            "Have an Account?",
+            "Forgot Password?",
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: 16,
@@ -24,11 +24,11 @@ class SignUpActions extends StatelessWidget {
         TextButton(
           onPressed: () {
             GoRouter.of(context).go(
-              AppRouter.kLoginView,
+              AppRouter.kRegisterView,
             );
           },
           child: const Text(
-            "Sign In",
+            "Create Account",
             style: TextStyle(
               fontSize: 16,
               color: Colors.grey,
