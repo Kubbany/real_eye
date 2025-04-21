@@ -5,7 +5,7 @@ import 'package:real_eye/Features/authentication/presentation/views/login_view.d
 import 'package:real_eye/Features/authentication/presentation/views/register_view.dart';
 import 'package:real_eye/Features/contact_us/presentation/views/contact_us_view.dart';
 import 'package:real_eye/Features/deepfake_detection/presentation/views/deepfake_detection_view.dart';
-import 'package:real_eye/Features/splash/presentaion/views/splash_view.dart';
+import 'package:real_eye/Features/splash/presentation/views/splash_view.dart';
 import 'package:real_eye/features/home/presentation/views/home_view.dart';
 
 abstract class AppRouter {
