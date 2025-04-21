@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:real_eye/core/utils/app_router.dart';
+import 'package:real_eye/core/utils/methods/navigate_to_login.dart';
 import 'package:real_eye/core/widgets/custom_button.dart';
 
 class DeepfakeDetectionActions extends StatelessWidget {
@@ -21,9 +20,7 @@ class DeepfakeDetectionActions extends StatelessWidget {
               buttonHeight: 55,
               titleSize: 16,
               onPressed: () {
-                GoRouter.of(context).push(
-                  AppRouter.kLoginView,
-                );
+                navigateToLogin(context);
               },
               borderRadius: 64,
               backgroundColor: const Color(0xff224ef6),
@@ -39,7 +36,9 @@ class DeepfakeDetectionActions extends StatelessWidget {
               buttonHeight: 55,
               borderSideWidth: 1.5,
               borderColor: Colors.blue,
-              onPressed: () {},
+              onPressed: () {
+                navigateToLogin(context);
+              },
               borderRadius: 64,
               backgroundColor: Colors.transparent,
             ),

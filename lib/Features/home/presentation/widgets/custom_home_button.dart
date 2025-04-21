@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:real_eye/core/utils/methods/navigate_to_login.dart';
 
 class CustomHomeButton extends StatelessWidget {
   const CustomHomeButton({super.key});
@@ -17,7 +18,9 @@ class CustomHomeButton extends StatelessWidget {
         ],
       ),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          navigateToLogin(context);
+        },
         style: ElevatedButton.styleFrom(
           minimumSize: const Size(
             double.infinity,
