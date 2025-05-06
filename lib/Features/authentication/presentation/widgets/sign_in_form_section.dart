@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:real_eye/Features/contact_us/presentation/widgets/labeled_text_field.dart';
+import 'package:real_eye/core/utils/app_router.dart';
 import 'package:real_eye/core/widgets/custom_button.dart';
 
 class SignInFormSection extends StatelessWidget {
@@ -28,7 +30,9 @@ class SignInFormSection extends StatelessWidget {
           title: "Sign In",
           titleSize: 18,
           buttonHeight: 50,
-          onPressed: () {},
+          onPressed: () {
+            GoRouter.of(context).go(AppRouter.kChatFakeDetectionView);
+          },
           borderRadius: 8,
           backgroundColor: const Color(0xff264cf7),
         ),
