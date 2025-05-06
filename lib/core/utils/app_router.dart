@@ -74,6 +74,20 @@ abstract class AppRouter {
           const ContactUsView(),
         ),
       ),
+      GoRoute(
+        path: kKnowledgeCenterView,
+        pageBuilder: (context, state) => slidingNavigation(
+          state,
+          const ContactUsView(),
+        ),
+      ),
+      GoRoute(
+        path: kFAQView,
+        pageBuilder: (context, state) => slidingNavigation(
+          state,
+          const ContactUsView(),
+        ),
+      ),
     ],
   );
 

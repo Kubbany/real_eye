@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:real_eye/Features/chat_fake_detectoin/presentation/widgets/chat_fake_detection_view_body.dart';
-import 'package:real_eye/Features/chat_fake_detectoin/presentation/widgets/user_drawer.dart';
+import 'package:real_eye/core/widgets/user_drawer.dart';
 
 class ChatFakeDetectionView extends StatefulWidget {
   const ChatFakeDetectionView({super.key});
