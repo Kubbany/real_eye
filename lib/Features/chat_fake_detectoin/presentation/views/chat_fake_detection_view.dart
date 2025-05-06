@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:real_eye/Features/chat_fake_detectoin/presentation/widgets/chat_fake_detection_view_body.dart';
+import 'package:real_eye/Features/chat_fake_detectoin/presentation/widgets/user_drawer.dart';
 
 class ChatFakeDetectionView extends StatefulWidget {
   const ChatFakeDetectionView({super.key});
@@ -14,6 +15,7 @@ class _ChatFakeDetectionViewState extends State<ChatFakeDetectionView> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      drawer: const UserDrawer(),
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
