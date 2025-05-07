@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:real_eye/Features/FAQ/domain/entities/question_entity.dart';
-import 'package:real_eye/Features/FAQ/presentation/widgets/question_item.dart';
+import 'package:real_eye/Features/FAQ/presentation/widgets/questions_list_view.dart';
 import 'package:real_eye/core/widgets/custom_gradient_header.dart';
+import 'package:real_eye/core/widgets/user_app_bar.dart';
 
 class FAQViewBody extends StatelessWidget {
   const FAQViewBody({super.key});
@@ -15,18 +15,26 @@ class FAQViewBody extends StatelessWidget {
       ),
       child: Column(
         children: <Widget>[
-          CustomGradientHeader(
-            title: "Frequently Asked Questions",
-            titleSize: 25,
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          QuestionItem(
-            item: QuestionEntity(
-              question: "What are the dangers of Deepfakes?",
-              answer:
-                  "Deepfake are AI-generated manipulations of videos, images or audio that appear genuine. They can be used to spread misinformation, manipulate political opinions and even pose threats to national security",
+          UserAppBar(),
+          Expanded(
+            child: CustomScrollView(
+              physics: BouncingScrollPhysics(),
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Center(
+                    child: CustomGradientHeader(
+                      title: "FAQ",
+                      titleSize: 30,
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 25,
+                  ),
+                ),
+                QuestionsListView(),
+              ],
             ),
           ),
         ],

@@ -6,6 +6,26 @@ class Assets {
   /// assets/images/abdullah.jpg
   static const String imagesAbdullah = "assets/images/abdullah.jpg";
 
+  /// Assets for imagesCase1
+  /// assets/images/case_1.jpg
+  static const String imagesCase1 = "assets/images/case_1.jpg";
+
+  /// Assets for imagesCase2
+  /// assets/images/case_2.webp
+  static const String imagesCase2 = "assets/images/case_2.webp";
+
+  /// Assets for imagesCase3
+  /// assets/images/case_3.png
+  static const String imagesCase3 = "assets/images/case_3.png";
+
+  /// Assets for imagesCase4
+  /// assets/images/case_4.png
+  static const String imagesCase4 = "assets/images/case_4.png";
+
+  /// Assets for imagesCase5
+  /// assets/images/case_5.jpg
+  static const String imagesCase5 = "assets/images/case_5.jpg";
+
   /// Assets for imagesDeepfake
   /// assets/images/deepfake.png
   static const String imagesDeepfake = "assets/images/deepfake.png";
