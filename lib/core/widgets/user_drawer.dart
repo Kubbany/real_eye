@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:real_eye/Features/chat_fake_detectoin/presentation/widgets/user_avatar.dart';
+import 'package:real_eye/core/utils/app_router.dart';
 import 'package:real_eye/core/widgets/custom_button.dart';
 import 'package:real_eye/core/widgets/custom_logout_button.dart';
 
@@ -30,9 +32,24 @@ class UserDrawer extends StatelessWidget {
             const SizedBox(height: 20),
             const Divider(color: Colors.grey, thickness: 3),
             const SizedBox(height: 20),
-            _buildDrawerButton('Detect Deepfakes', () {}),
-            _buildDrawerButton('Knowledge Center', () {}),
-            _buildDrawerButton('FAQ', () {}),
+            _buildDrawerButton(
+              'Detect Deepfakes',
+              () {
+                GoRouter.of(context).go(AppRouter.kChatFakeDetectionView);
+              },
+            ),
+            _buildDrawerButton(
+              'Knowledge Center',
+              () {
+                GoRouter.of(context).go(AppRouter.kKnowledgeCenterView);
+              },
+            ),
+            _buildDrawerButton(
+              'FAQ',
+              () {
+                GoRouter.of(context).go(AppRouter.kFAQView);
+              },
+            ),
             const Spacer(),
             const CustomLogoutButton(),
           ],

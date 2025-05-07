@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:real_eye/Features/FAQ/presentation/views/faq_view.dart';
 import 'package:real_eye/Features/about_us/presentation/views/about_us_view.dart';
 import 'package:real_eye/Features/authentication/presentation/views/login_view.dart';
 import 'package:real_eye/Features/authentication/presentation/views/register_view.dart';
 import 'package:real_eye/Features/chat_fake_detectoin/presentation/views/chat_fake_detection_view.dart';
 import 'package:real_eye/Features/contact_us/presentation/views/contact_us_view.dart';
 import 'package:real_eye/Features/deepfake_detection/presentation/views/deepfake_detection_view.dart';
+import 'package:real_eye/Features/knowledge_center/presentation/views/knowledge_center_view.dart';
 import 'package:real_eye/Features/splash/presentation/views/splash_view.dart';
 import 'package:real_eye/features/home/presentation/views/home_view.dart';
 
@@ -78,14 +80,14 @@ abstract class AppRouter {
         path: kKnowledgeCenterView,
         pageBuilder: (context, state) => slidingNavigation(
           state,
-          const ContactUsView(),
+          const KnowledgeCenterView(),
         ),
       ),
       GoRoute(
         path: kFAQView,
         pageBuilder: (context, state) => slidingNavigation(
           state,
-          const ContactUsView(),
+          const FAQView(),
         ),
       ),
     ],
