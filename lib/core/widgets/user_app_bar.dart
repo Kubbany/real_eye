@@ -8,6 +8,10 @@ class UserAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.only(
+        left: 16,
+        top: 20,
+      ),
       alignment: Alignment.centerLeft,
       width: double.infinity,
       color: Colors.black,

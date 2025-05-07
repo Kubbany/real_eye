@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:real_eye/core/utils/app_router.dart';
 
 class CustomLogoutButton extends StatelessWidget {
   const CustomLogoutButton({
@@ -10,7 +12,9 @@ class CustomLogoutButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: ElevatedButton.icon(
-        onPressed: () {},
+        onPressed: () {
+          GoRouter.of(context).go(AppRouter.kHomeView);
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF3D5AFE), // Blue logout button
           shape: RoundedRectangleBorder(

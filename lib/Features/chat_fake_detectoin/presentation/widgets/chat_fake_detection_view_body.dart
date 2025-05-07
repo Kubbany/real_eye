@@ -8,24 +8,30 @@ class ChatFakeDetectionViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 20,
-      ),
-      child: Column(
-        children: [
-          UserAppBar(),
-          CustomGradientHeader(
-            title: "Detect Deepfakes",
-            titleSize: 40,
+    return const Column(
+      children: <Widget>[
+        UserAppBar(),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 20,
+            ),
+            child: Column(
+              children: <Widget>[
+                CustomGradientHeader(
+                  title: "Detect Deepfakes",
+                  titleSize: 40,
+                ),
+                Expanded(
+                  child: SizedBox(),
+                ),
+                MediaUploadTextField(),
+              ],
+            ),
           ),
-          Expanded(
-            child: SizedBox(),
-          ),
-          MediaUploadTextField(),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

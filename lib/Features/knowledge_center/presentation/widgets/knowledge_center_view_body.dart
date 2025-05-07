@@ -1,10 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:real_eye/Features/knowledge_center/presentation/widgets/deepfake_cases_list_view.dart';
+import 'package:real_eye/Features/knowledge_center/presentation/widgets/knowledge_center_title_section.dart';
+import 'package:real_eye/core/widgets/user_app_bar.dart';
 
 class KnowledgeCenterViewBody extends StatelessWidget {
   const KnowledgeCenterViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Column(
+      children: <Widget>[
+        UserAppBar(),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 20,
+            ),
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: CustomScrollView(
+                    physics: BouncingScrollPhysics(),
+                    slivers: [
+                      SliverToBoxAdapter(
+                        child: KnowledgeCenterHeaderSection(),
+                      ),
+                      DeepfakeCasesListView(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

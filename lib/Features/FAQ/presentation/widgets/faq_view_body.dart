@@ -8,37 +8,43 @@ class FAQViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 20,
-      ),
-      child: Column(
-        children: <Widget>[
-          UserAppBar(),
-          Expanded(
-            child: CustomScrollView(
-              physics: BouncingScrollPhysics(),
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Center(
-                    child: CustomGradientHeader(
-                      title: "FAQ",
-                      titleSize: 30,
-                    ),
+    return const Column(
+      children: <Widget>[
+        UserAppBar(),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 20,
+            ),
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: CustomScrollView(
+                    physics: BouncingScrollPhysics(),
+                    slivers: [
+                      SliverToBoxAdapter(
+                        child: Center(
+                          child: CustomGradientHeader(
+                            title: "FAQ",
+                            titleSize: 40,
+                          ),
+                        ),
+                      ),
+                      SliverToBoxAdapter(
+                        child: SizedBox(
+                          height: 15,
+                        ),
+                      ),
+                      QuestionsListView(),
+                    ],
                   ),
                 ),
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 25,
-                  ),
-                ),
-                QuestionsListView(),
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
