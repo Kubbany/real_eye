@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:real_eye/core/widgets/custom_password_field.dart';
 import 'package:real_eye/core/widgets/custom_text_field.dart';
 
 class LabeledTextField extends StatelessWidget {
@@ -29,14 +30,19 @@ class LabeledTextField extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        CustomTextField(
-          keyboardType: keyboardType,
-          isPasswordField: isPasswordField,
-          fillColor: Colors.grey[800],
-          validator: validator,
-          hintText: hint,
-          verticalContentPadding: verticalContentPadding,
-        ),
+        isPasswordField
+            ? CustomPasswordField(
+                fillColor: Colors.grey[800],
+                validator: validator,
+                hintText: hint,
+              )
+            : CustomTextField(
+                keyboardType: keyboardType,
+                fillColor: Colors.grey[800],
+                validator: validator,
+                hintText: hint,
+                verticalContentPadding: verticalContentPadding,
+              ),
       ],
     );
   }

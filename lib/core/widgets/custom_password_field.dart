@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatefulWidget {
-  const CustomTextField({
+class CustomPasswordField extends StatefulWidget {
+  const CustomPasswordField({
     super.key,
     required this.hintText,
-    this.keyboardType,
     this.textEditingController,
     this.validator,
-    this.verticalContentPadding,
     this.fillColor,
   });
   final String hintText;
   final Color? fillColor;
-  final double? verticalContentPadding;
   final TextEditingController? textEditingController;
-  final TextInputType? keyboardType;
   final String? Function(String?)? validator;
   @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
+  State<CustomPasswordField> createState() => _CustomPasswordFieldState();
 }
 
-class _CustomTextFieldState extends State<CustomTextField> {
+class _CustomPasswordFieldState extends State<CustomPasswordField> {
   bool isVisible = false;
   @override
   Widget build(BuildContext context) {
@@ -34,16 +30,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
             }
             return null;
           },
-      keyboardType: widget.keyboardType,
-      textAlignVertical: widget.verticalContentPadding == null ? null : TextAlignVertical.top,
+      obscureText: !isVisible,
       decoration: InputDecoration(
         filled: true,
         fillColor: widget.fillColor ?? const Color(0xff101825),
-        contentPadding: EdgeInsets.only(
+        contentPadding: const EdgeInsets.only(
           top: 12,
           left: 16,
           right: 16,
-          bottom: widget.verticalContentPadding ?? 12,
+          bottom: 12,
         ),
         enabledBorder: buildBorder(),
         errorBorder: buildBorder(color: Colors.red),
@@ -57,6 +52,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
         hintStyle: const TextStyle(
           fontSize: 16,
           color: Colors.grey,
+        ),
+        suffixIcon: IconButton(
+          onPressed: () {
+            isVisible = !isVisible;
+            setState(() {});
+          },
+          icon: Icon(
+            isVisible != true ? Icons.visibility_off : Icons.visibility,
+          ),
         ),
       ),
     );
