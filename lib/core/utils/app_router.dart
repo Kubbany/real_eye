@@ -9,6 +9,7 @@ import 'package:real_eye/Features/contact_us/presentation/views/contact_us_view.
 import 'package:real_eye/Features/create_post/presentation/views/create_post_view.dart';
 import 'package:real_eye/Features/deepfake_detection/presentation/views/deepfake_detection_view.dart';
 import 'package:real_eye/Features/knowledge_center/presentation/views/knowledge_center_view.dart';
+import 'package:real_eye/Features/posts/presentation/views/posts_view.dart';
 import 'package:real_eye/Features/splash/presentation/views/splash_view.dart';
 import 'package:real_eye/features/home/presentation/views/home_view.dart';
 
@@ -104,7 +105,7 @@ abstract class AppRouter {
         path: kPostsView,
         pageBuilder: (context, state) => slidingNavigation(
           state,
-          const FAQView(),
+          const PostsView(),
         ),
       ),
     ],

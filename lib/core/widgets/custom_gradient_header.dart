@@ -5,7 +5,7 @@ class CustomGradientHeader extends StatelessWidget {
     super.key,
     required this.title,
     this.giveHeight = false,
-    this.titleSize,
+    this.titleSize = 60,
   });
   final String title;
   final double? titleSize;
@@ -23,7 +23,7 @@ class CustomGradientHeader extends StatelessWidget {
       child: Text(
         title,
         style: TextStyle(
-          fontSize: titleSize ?? 60,
+          fontSize: titleSize,
           height: giveHeight ? 1 : null,
           fontWeight: FontWeight.bold,
           color: Colors.white, // Required for ShaderMask to work
