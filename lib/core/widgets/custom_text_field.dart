@@ -9,10 +9,12 @@ class CustomTextField extends StatefulWidget {
     this.validator,
     this.verticalContentPadding,
     this.fillColor,
+    this.borderColor,
+    this.borderRadius,
   });
   final String hintText;
-  final Color? fillColor;
-  final double? verticalContentPadding;
+  final Color? fillColor, borderColor;
+  final double? verticalContentPadding, borderRadius;
   final TextEditingController? textEditingController;
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
@@ -45,13 +47,21 @@ class _CustomTextFieldState extends State<CustomTextField> {
           right: 16,
           bottom: widget.verticalContentPadding ?? 12,
         ),
-        enabledBorder: buildBorder(),
-        errorBorder: buildBorder(color: Colors.red),
+        enabledBorder: buildBorder(
+          color: widget.borderColor,
+          borderRadius: widget.borderRadius,
+        ),
+        errorBorder: buildBorder(
+          color: Colors.red,
+          borderRadius: widget.borderRadius,
+        ),
         focusedBorder: buildBorder(
           color: Colors.blue,
+          borderRadius: widget.borderRadius,
         ),
         focusedErrorBorder: buildBorder(
           color: Colors.red,
+          borderRadius: widget.borderRadius,
         ),
         hintText: widget.hintText,
         hintStyle: const TextStyle(
@@ -62,9 +72,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
     );
   }
 
-  OutlineInputBorder buildBorder({Color? color}) {
+  OutlineInputBorder buildBorder({Color? color, double? borderRadius}) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(6),
+      borderRadius: BorderRadius.circular(borderRadius ?? 6),
       borderSide: BorderSide(
         color: color ?? Colors.transparent,
       ),

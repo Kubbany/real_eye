@@ -6,6 +6,7 @@ import 'package:real_eye/Features/authentication/presentation/views/login_view.d
 import 'package:real_eye/Features/authentication/presentation/views/register_view.dart';
 import 'package:real_eye/Features/chat_fake_detectoin/presentation/views/chat_fake_detection_view.dart';
 import 'package:real_eye/Features/contact_us/presentation/views/contact_us_view.dart';
+import 'package:real_eye/Features/create_post/presentation/views/create_post_view.dart';
 import 'package:real_eye/Features/deepfake_detection/presentation/views/deepfake_detection_view.dart';
 import 'package:real_eye/Features/knowledge_center/presentation/views/knowledge_center_view.dart';
 import 'package:real_eye/Features/splash/presentation/views/splash_view.dart';
@@ -21,6 +22,8 @@ abstract class AppRouter {
   static const kContactUsView = "/contactUsView";
   static const kKnowledgeCenterView = "/knowledgeCenterView";
   static const kFAQView = "/fAQView";
+  static const kCreatePostView = "/createPostView";
+  static const kPostsView = "/postsView";
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -85,6 +88,20 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kFAQView,
+        pageBuilder: (context, state) => slidingNavigation(
+          state,
+          const FAQView(),
+        ),
+      ),
+      GoRoute(
+        path: kCreatePostView,
+        pageBuilder: (context, state) => slidingNavigation(
+          state,
+          const CreatePostView(),
+        ),
+      ),
+      GoRoute(
+        path: kPostsView,
         pageBuilder: (context, state) => slidingNavigation(
           state,
           const FAQView(),

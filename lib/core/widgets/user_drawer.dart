@@ -50,6 +50,18 @@ class UserDrawer extends StatelessWidget {
                 GoRouter.of(context).go(AppRouter.kFAQView);
               },
             ),
+            CustomDrawerButton(
+              title: 'Posts',
+              onPressed: () {
+                GoRouter.of(context).go(AppRouter.kPostsView);
+              },
+            ),
+            CustomDrawerButton(
+              title: 'Create Post',
+              onPressed: () {
+                GoRouter.of(context).go(AppRouter.kCreatePostView);
+              },
+            ),
             const Spacer(),
             const CustomLogoutButton(),
           ],
