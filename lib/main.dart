@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:real_eye/core/services/service_locator.dart';
 import 'package:real_eye/core/utils/app_router.dart';
 
 void main() {
+  setupServiceLocator();
   runApp(const RealEye());
 }
 

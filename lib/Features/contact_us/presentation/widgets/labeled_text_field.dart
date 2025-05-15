@@ -11,8 +11,10 @@ class LabeledTextField extends StatelessWidget {
     this.keyboardType,
     this.validator,
     this.isPasswordField = false,
+    this.textEditingController,
   });
   final String label, hint;
+  final TextEditingController? textEditingController;
   final double? verticalContentPadding;
   final bool isPasswordField;
   final TextInputType? keyboardType;
@@ -32,11 +34,13 @@ class LabeledTextField extends StatelessWidget {
         ),
         isPasswordField
             ? CustomPasswordField(
+                textEditingController: textEditingController,
                 fillColor: Colors.grey[800],
                 validator: validator,
                 hintText: hint,
               )
             : CustomTextField(
+                textEditingController: textEditingController,
                 keyboardType: keyboardType,
                 fillColor: Colors.grey[800],
                 validator: validator,

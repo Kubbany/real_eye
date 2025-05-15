@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:real_eye/Features/contact_us/data/repos/contact_us_repo_impl.dart';
+import 'package:real_eye/Features/contact_us/domain/repos/contact_us_repo.dart';
 import 'package:real_eye/core/services/api_service.dart';
 import 'package:real_eye/core/services/dio_factory.dart';
 
@@ -8,6 +10,11 @@ void setupServiceLocator() {
   getIt.registerSingleton<ApiService>(
     ApiService(
       DioFactory.getDio(),
+    ),
+  );
+  getIt.registerSingleton<ContactUsRepo>(
+    ContactUsRepoImpl(
+      api: getIt<ApiService>(),
     ),
   );
 }

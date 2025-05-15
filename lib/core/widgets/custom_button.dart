@@ -12,6 +12,7 @@ class CustomButton extends StatelessWidget {
     this.titleSize,
     this.buttonHeight,
     this.borderSideWidth,
+    this.isLoading = false,
   });
 
   final VoidCallback onPressed;
@@ -23,6 +24,7 @@ class CustomButton extends StatelessWidget {
   final double? titleSize;
   final double? buttonHeight;
   final double? borderSideWidth;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -49,15 +51,21 @@ class CustomButton extends StatelessWidget {
                 vertical: 15,
               )
             : EdgeInsets.zero,
-        child: Text(
-          title,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: titleSize,
-            color: titleColor ?? Colors.white,
-          ),
-        ),
+        child: isLoading
+            ? const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              )
+            : Text(
+                title,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: titleSize,
+                  color: titleColor ?? Colors.white,
+                ),
+              ),
       ),
     );
   }

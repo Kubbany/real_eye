@@ -2,40 +2,48 @@ import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioFactory {
-  /// private constructor as I don't want to allow creating an instance of this class
   DioFactory._();
 
-  static Dio? dio;
+  static Dio? _dio;
 
   static Dio getDio() {
-    Duration timeOut = const Duration(seconds: 30);
+    if (_dio == null) {
+      _dio = Dio(
+        BaseOptions(
+          connectTimeout: const Duration(seconds: 30),
+          receiveTimeout: const Duration(seconds: 30),
+          sendTimeout: const Duration(seconds: 30),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
 
-    if (dio == null) {
-      dio = Dio();
-      dio!
-        ..options.connectTimeout = timeOut
-        ..options.receiveTimeout = timeOut;
-      addDioHeaders();
-      addDioInterceptor();
-      return dio!;
-    } else {
-      return dio!;
+      // Add interceptors
+      _addDioInterceptors();
+
+      // Enable for local development (remove in production)
     }
+    return _dio!;
   }
 
-  static void addDioHeaders() async {
-    dio?.options.headers = {
-      'Accept': 'application/json',
-    };
-  }
-
-  static void addDioInterceptor() {
-    dio?.interceptors.add(
+  static void _addDioInterceptors() {
+    _dio?.interceptors.addAll([
       PrettyDioLogger(
-        requestBody: true,
         requestHeader: true,
+        requestBody: true,
         responseHeader: true,
+        responseBody: true,
+        error: true,
+        compact: true,
       ),
-    );
+      // Add other interceptors here if needed
+    ]);
+  }
+
+  // Clear existing Dio instance (for testing/config changes)
+  static void reset() {
+    _dio = null;
   }
 }

@@ -4,7 +4,7 @@ import 'package:real_eye/core/errors/failure.dart';
 import 'package:real_eye/core/services/api_service.dart';
 import 'package:real_eye/core/utils/result.dart';
 
-class ContactUsRepoImpl extends ContactUsRep {
+class ContactUsRepoImpl extends ContactUsRepo {
   final ApiService api;
 
   ContactUsRepoImpl({required this.api});
@@ -14,7 +14,7 @@ class ContactUsRepoImpl extends ContactUsRep {
       final response = await api.postMessage(message);
       return Result.success(response);
     } catch (e) {
-      return Result.failure(ErrorHandler.handle(e));
+      return Result.fail(ErrorHandler.handle(e));
     }
   }
 }

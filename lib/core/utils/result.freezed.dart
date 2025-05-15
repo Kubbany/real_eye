@@ -100,62 +100,62 @@ class _$SuccessCopyWithImpl<T, $Res> implements $SuccessCopyWith<T, $Res> {
 
 /// @nodoc
 
-class Failure<T> implements Result<T> {
-  const Failure(this.failure);
+class Fail<T> implements Result<T> {
+  const Fail(this.fail);
 
-  final f.Failure failure;
+  final Failure fail;
 
   /// Create a copy of Result
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $FailureCopyWith<T, Failure<T>> get copyWith =>
-      _$FailureCopyWithImpl<T, Failure<T>>(this, _$identity);
+  $FailCopyWith<T, Fail<T>> get copyWith =>
+      _$FailCopyWithImpl<T, Fail<T>>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is Failure<T> &&
-            (identical(other.failure, failure) || other.failure == failure));
+            other is Fail<T> &&
+            (identical(other.fail, fail) || other.fail == fail));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, failure);
+  int get hashCode => Object.hash(runtimeType, fail);
 
   @override
   String toString() {
-    return 'Result<$T>.failure(failure: $failure)';
+    return 'Result<$T>.fail(fail: $fail)';
   }
 }
 
 /// @nodoc
-abstract mixin class $FailureCopyWith<T, $Res>
+abstract mixin class $FailCopyWith<T, $Res>
     implements $ResultCopyWith<T, $Res> {
-  factory $FailureCopyWith(Failure<T> value, $Res Function(Failure<T>) _then) =
-      _$FailureCopyWithImpl;
+  factory $FailCopyWith(Fail<T> value, $Res Function(Fail<T>) _then) =
+      _$FailCopyWithImpl;
   @useResult
-  $Res call({f.Failure failure});
+  $Res call({Failure fail});
 }
 
 /// @nodoc
-class _$FailureCopyWithImpl<T, $Res> implements $FailureCopyWith<T, $Res> {
-  _$FailureCopyWithImpl(this._self, this._then);
+class _$FailCopyWithImpl<T, $Res> implements $FailCopyWith<T, $Res> {
+  _$FailCopyWithImpl(this._self, this._then);
 
-  final Failure<T> _self;
-  final $Res Function(Failure<T>) _then;
+  final Fail<T> _self;
+  final $Res Function(Fail<T>) _then;
 
   /// Create a copy of Result
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? failure = null,
+    Object? fail = null,
   }) {
-    return _then(Failure<T>(
-      null == failure
-          ? _self.failure
-          : failure // ignore: cast_nullable_to_non_nullable
-              as f.Failure,
+    return _then(Fail<T>(
+      null == fail
+          ? _self.fail
+          : fail // ignore: cast_nullable_to_non_nullable
+              as Failure,
     ));
   }
 }
