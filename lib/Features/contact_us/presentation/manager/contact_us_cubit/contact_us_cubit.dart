@@ -18,6 +18,7 @@ class ContactUsCubit extends Cubit<ContactUsState> {
   ContactUsCubit(this.contactUsRepo) : super(const ContactUsState.initial());
   final ContactUsRepo contactUsRepo;
   Future<void> sendMessage() async {
+    ignoreValidation = false;
     if (formKey.currentState!.validate()) {
       safeEmit(const ContactUsState.loading());
       final MessageModel messageModel = MessageModel(fullname: fullName.text, email: email.text, message: message.text);
@@ -25,13 +26,11 @@ class ContactUsCubit extends Cubit<ContactUsState> {
 
       switch (result) {
         case Success():
-          safeEmit(const ContactUsState.success());
           fullName.clear();
           email.clear();
           message.clear();
           ignoreValidation = true;
-          formKey.currentState!.validate();
-          ignoreValidation = false;
+          safeEmit(const ContactUsState.success());
         case Fail(:final fail):
           safeEmit(ContactUsState.failure(fail.errorMessage));
       }

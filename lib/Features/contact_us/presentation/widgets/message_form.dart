@@ -29,21 +29,30 @@ class MessageForm extends StatelessWidget {
             textEditingController: context.read<ContactUsCubit>().fullName,
             label: "Full Name",
             hint: "Enter Your Name",
-            validator: context.read<ContactUsCubit>().ignoreValidation ? null : AppValidators.requiredField,
+            validator: (value) => AppValidators.requiredField(
+              value,
+              ignoreValidation: context.read<ContactUsCubit>().ignoreValidation,
+            ),
           ),
           LabeledTextField(
             label: "Email Address",
             textEditingController: context.read<ContactUsCubit>().email,
             hint: "Enter Your Email",
             keyboardType: TextInputType.emailAddress,
-            validator: context.read<ContactUsCubit>().ignoreValidation ? null : AppValidators.emailValidation,
+            validator: (value) => AppValidators.emailValidation(
+              value,
+              ignoreValidation: context.read<ContactUsCubit>().ignoreValidation,
+            ),
           ),
           LabeledTextField(
             textEditingController: context.read<ContactUsCubit>().message,
             label: "Message",
             hint: "Type Your Message...",
             verticalContentPadding: 90,
-            validator: context.read<ContactUsCubit>().ignoreValidation ? null : AppValidators.requiredField,
+            validator: (value) => AppValidators.requiredField(
+              value,
+              ignoreValidation: context.read<ContactUsCubit>().ignoreValidation,
+            ),
           ),
           const SizedBox(
             height: 10,
