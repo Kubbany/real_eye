@@ -1,3 +1,5 @@
+import 'package:real_eye/Features/authentication/data/models/login_request.dart';
+import 'package:real_eye/Features/authentication/data/models/login_response.dart';
 import 'package:real_eye/Features/authentication/data/models/register_request.dart';
 import 'package:real_eye/Features/authentication/domain/repos/auth_repo.dart';
 import 'package:real_eye/core/errors/failure.dart';
@@ -13,6 +15,16 @@ class AuthRepoImpl extends AuthRepo {
   Future<Result<void>> register({required RegisterRequest userRequest}) async {
     try {
       final response = await api.postRegister(userRequest);
+      return Result.success(response);
+    } catch (e) {
+      return Result.fail(ErrorHandler.handle(e));
+    }
+  }
+
+  @override
+  Future<Result<LoginResponse>> login({required LoginRequest loginRequest}) async {
+    try {
+      final response = await api.postLogin(loginRequest);
       return Result.success(response);
     } catch (e) {
       return Result.fail(ErrorHandler.handle(e));
