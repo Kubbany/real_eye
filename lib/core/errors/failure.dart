@@ -37,7 +37,7 @@ class ServerFailure extends Failure {
     } else if (statusCode >= 500) {
       return const ServerFailure(errorMessage: "Internal Server Error, Please Try Again.");
     } else if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
-      return ServerFailure(errorMessage: response['error']['message']);
+      return ServerFailure(errorMessage: response['message']);
     }
     return const ServerFailure(errorMessage: "Unknown Error, Please Try Again Later.");
   }

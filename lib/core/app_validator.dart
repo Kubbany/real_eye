@@ -23,4 +23,24 @@ class AppValidators {
     }
     return null;
   }
+
+  static String? passwordValidation(String? value) {
+    if (value == null || value.isEmpty) {
+      return "This Field Cannot Be Empty";
+    }
+    if (value.length < 8) {
+      return "Password Must Be At Least 8 Chars";
+    }
+    return null;
+  }
+
+  static String? confirmPasswordValiation(String? value, String passwordValue) {
+    if (value == null || value.isEmpty) {
+      return "This Field Cannot Be Empty";
+    }
+    if (value != passwordValue) {
+      return "Password Doesn't Match";
+    }
+    return null;
+  }
 }
