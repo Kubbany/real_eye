@@ -3,6 +3,7 @@ import 'package:real_eye/core/services/service_locator.dart';
 import 'package:real_eye/core/utils/app_router.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   setupServiceLocator();
   runApp(const RealEye());
 }

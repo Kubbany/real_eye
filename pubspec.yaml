@@ -36,6 +36,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  flutter_secure_storage: ^9.2.4
   font_awesome_flutter: ^10.8.0
   freezed: ^3.0.6
   freezed_annotation: ^3.0.0

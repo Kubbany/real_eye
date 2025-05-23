@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:real_eye/Features/authentication/data/models/login_request.dart';
 import 'package:real_eye/Features/authentication/data/models/login_response.dart';
 import 'package:real_eye/Features/authentication/data/models/register_request.dart';
+import 'package:real_eye/Features/authentication/data/models/user_model.dart';
 import 'package:real_eye/Features/contact_us/data/models/message_model.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -17,4 +18,6 @@ abstract class ApiService {
   Future<void> postRegister(@Body() RegisterRequest userRequest);
   @POST('/auth/login')
   Future<LoginResponse> postLogin(@Body() LoginRequest loginRequest);
+  @GET('/users/user')
+  Future<UserModel> getCurrentUser();
 }
