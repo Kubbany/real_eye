@@ -10,7 +10,7 @@ part of 'api_service.dart';
 
 class _ApiService implements ApiService {
   _ApiService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'http://192.168.1.4:5555/api/';
+    baseUrl ??= 'http://192.168.1.2:5555/api/';
   }
 
   final Dio _dio;
@@ -134,9 +134,7 @@ class _ApiService implements ApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<PostModel> _value;
     try {
-      _value = _result.data!
-          .map((dynamic i) => PostModel.fromJson(i as Map<String, dynamic>))
-          .toList();
+      _value = _result.data!.map((dynamic i) => PostModel.fromJson(i as Map<String, dynamic>)).toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -178,8 +176,7 @@ class _ApiService implements ApiService {
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
-        !(requestOptions.responseType == ResponseType.bytes ||
-            requestOptions.responseType == ResponseType.stream)) {
+        !(requestOptions.responseType == ResponseType.bytes || requestOptions.responseType == ResponseType.stream)) {
       if (T == String) {
         requestOptions.responseType = ResponseType.plain;
       } else {
