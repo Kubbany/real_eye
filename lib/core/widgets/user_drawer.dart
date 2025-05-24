@@ -34,6 +34,12 @@ class UserDrawer extends StatelessWidget {
             const Divider(color: Colors.grey, thickness: 3),
             const SizedBox(height: 20),
             CustomDrawerButton(
+              title: 'Profile',
+              onPressed: () {
+                GoRouter.of(context).go(AppRouter.kProfilePostsView, extra: user);
+              },
+            ),
+            CustomDrawerButton(
               title: 'Detect Deepfakes',
               onPressed: () {
                 GoRouter.of(context).go(AppRouter.kChatFakeDetectionView, extra: user);
