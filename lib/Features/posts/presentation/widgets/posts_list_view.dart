@@ -15,9 +15,16 @@ class PostsListView extends StatelessWidget {
           return ListView.builder(
             physics: const BouncingScrollPhysics(),
             itemCount: state.posts.length,
-            itemBuilder: (context, index) => PostItem(
-              post: state.posts[(state.posts.length - 1) - index],
-            ),
+            itemBuilder: (context, index) => state.posts.isNotEmpty
+                ? PostItem(
+                    post: state.posts[(state.posts.length - 1) - index],
+                  )
+                : const Center(
+                    child: Text(
+                      "No Posts Available Yet",
+                      style: TextStyle(fontSize: 20, color: Colors.grey),
+                    ),
+                  ),
           );
         } else if (state is PostsFailure) {
           return Center(
