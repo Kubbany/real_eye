@@ -3,6 +3,8 @@ import 'package:real_eye/Features/authentication/data/repos/auth_repo_impl.dart'
 import 'package:real_eye/Features/authentication/domain/repos/auth_repo.dart';
 import 'package:real_eye/Features/contact_us/data/repos/contact_us_repo_impl.dart';
 import 'package:real_eye/Features/contact_us/domain/repos/contact_us_repo.dart';
+import 'package:real_eye/Features/posts/data/repos/posts_repo_impl.dart';
+import 'package:real_eye/Features/posts/domain/repos/posts_repo.dart';
 import 'package:real_eye/core/services/api_service.dart';
 import 'package:real_eye/core/services/dio_factory.dart';
 
@@ -21,6 +23,11 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<AuthRepo>(
     AuthRepoImpl(
+      api: getIt<ApiService>(),
+    ),
+  );
+  getIt.registerSingleton<PostsRepo>(
+    PostsRepoImpl(
       api: getIt<ApiService>(),
     ),
   );
