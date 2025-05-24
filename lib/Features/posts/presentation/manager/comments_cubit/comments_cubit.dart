@@ -10,6 +10,8 @@ part 'comments_state.dart';
 class CommentsCubit extends Cubit<CommentsState> {
   final CommentsRepo commentsRepo;
 
+  final TextEditingController comment = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   CommentsCubit(this.commentsRepo) : super(CommentsInitial());
 
   Future<void> getComments(String postId) async {
@@ -21,5 +23,31 @@ class CommentsCubit extends Cubit<CommentsState> {
       case Fail(:final fail):
         safeEmit(CommentsFailure(errorMessage: fail.errorMessage));
     }
+  }
+
+  Future<void> createComment({
+    required String text,
+    required String postId,
+  }) async {
+    if (formKey.currentState!.validate()) {
+      safeEmit(CommentPostLoading());
+      final result = await commentsRepo.createComment(
+        text: text,
+        postId: postId,
+      );
+      switch (result) {
+        case Success():
+          safeEmit(CommentCreatedSuccess(commentId: result.data));
+          getComments(postId); // Refresh comments list
+        case Fail(:final fail):
+          safeEmit(CommentsFailure(errorMessage: fail.errorMessage));
+      }
+    }
+  }
+
+  @override
+  Future<void> close() {
+    comment.dispose();
+    return super.close();
   }
 }

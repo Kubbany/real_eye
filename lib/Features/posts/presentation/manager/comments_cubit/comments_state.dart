@@ -7,10 +7,18 @@ final class CommentsInitial extends CommentsState {}
 
 final class CommentsLoading extends CommentsState {}
 
+final class CommentPostLoading extends CommentsState {}
+
 final class CommentsSuccess extends CommentsState {
   final List<CommentEntity> comments;
 
   CommentsSuccess({required this.comments});
+}
+
+final class CommentCreatedSuccess extends CommentsState {
+  final String commentId;
+
+  CommentCreatedSuccess({required this.commentId});
 }
 
 final class CommentsFailure extends CommentsState {

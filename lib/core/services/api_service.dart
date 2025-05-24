@@ -7,6 +7,8 @@ import 'package:real_eye/Features/contact_us/data/models/message_model.dart';
 import 'package:real_eye/Features/create_post/data/models/create_post_request.dart';
 import 'package:real_eye/Features/create_post/data/models/create_post_response.dart';
 import 'package:real_eye/Features/posts/data/models/comment_model.dart';
+import 'package:real_eye/Features/posts/data/models/create_comment_request.dart';
+import 'package:real_eye/Features/posts/data/models/create_comment_response.dart';
 import 'package:real_eye/Features/posts/data/models/post_model.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -33,6 +35,11 @@ abstract class ApiService {
 
   @POST('posts')
   Future<CreatePostResponse> createPost(@Header('Authorization') String token, @Body() CreatePostRequest request);
+
   @GET("comments/{postId}")
   Future<List<CommentModel>> getComments(@Path("postId") String postId, @Header("Authorization") String token);
+
+  @POST("comments")
+  Future<CreateCommentResponse> createComment(
+      @Header("Authorization") String token, @Body() CreateCommentRequest request);
 }
