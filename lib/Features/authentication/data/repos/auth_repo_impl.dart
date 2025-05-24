@@ -5,7 +5,6 @@ import 'package:real_eye/Features/authentication/data/models/user_model.dart';
 import 'package:real_eye/Features/authentication/domain/repos/auth_repo.dart';
 import 'package:real_eye/core/errors/failure.dart';
 import 'package:real_eye/core/services/api_service.dart';
-import 'package:real_eye/core/services/service_locator.dart';
 import 'package:real_eye/core/services/user_manager_service.dart';
 import 'package:real_eye/core/utils/result.dart';
 
@@ -38,7 +37,7 @@ class AuthRepoImpl extends AuthRepo {
   Future<Result<UserModel>> getCurrentUser() async {
     try {
       final response = await api.getCurrentUser();
-      final LoginResponse? loginResponse = await getIt<UserManagerService>().getLoginResponse();
+      final LoginResponse? loginResponse = await UserManagerService.instance.getLoginResponse();
       response.userID = loginResponse?.userID ?? "";
       return Result.success(response);
     } catch (e) {

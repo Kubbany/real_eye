@@ -8,7 +8,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'api_service.g.dart';
 
-@RestApi(baseUrl: 'http://192.168.1.2:5555/api/')
+@RestApi(baseUrl: 'http://192.168.1.4:5555/api/')
 abstract class ApiService {
   factory ApiService(Dio dio, {String? baseUrl}) = _ApiService;
 

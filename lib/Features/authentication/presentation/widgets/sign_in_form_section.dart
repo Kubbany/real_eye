@@ -41,7 +41,7 @@ class SignInFormSection extends StatelessWidget {
               if (state is LoginStateSuccess) {
                 await UserManagerService.instance.setUserModel(state.user);
                 if (context.mounted) {
-                  GoRouter.of(context).go(AppRouter.kChatFakeDetectionView);
+                  GoRouter.of(context).go(AppRouter.kChatFakeDetectionView, extra: state.user);
                   showSnackBarMessage(context, "Logged In Successfuly!");
                 }
               }

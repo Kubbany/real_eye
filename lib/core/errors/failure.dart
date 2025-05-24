@@ -33,7 +33,11 @@ class ServerFailure extends Failure {
   }
   factory ServerFailure.fromResponse(int statusCode, dynamic response) {
     if (statusCode == 404) {
-      return const ServerFailure(errorMessage: "Request Not Found.");
+      String message = "Request Not Found";
+      if (response['message'] == "User not found") {
+        message = "Incorrect email or password";
+      }
+      return ServerFailure(errorMessage: message);
     } else if (statusCode >= 500) {
       return const ServerFailure(errorMessage: "Internal Server Error, Please Try Again.");
     } else if (statusCode == 400 || statusCode == 401 || statusCode == 403) {

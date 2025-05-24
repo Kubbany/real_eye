@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,9 +35,11 @@ class LoginCubit extends Cubit<LoginState> {
         final userModel = await authRepo.getCurrentUser();
         userModel.when(
           success: (user) {
+            log("Success$user");
             safeEmit(LoginStateSuccess(user: user));
           },
           failure: (fail) {
+            log("Failure:${fail.errorMessage}");
             safeEmit(LoginStateFailure(errorMessage: fail.errorMessage));
           },
         );
