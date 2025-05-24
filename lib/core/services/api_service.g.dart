@@ -134,7 +134,9 @@ class _ApiService implements ApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<PostModel> _value;
     try {
-      _value = _result.data!.map((dynamic i) => PostModel.fromJson(i as Map<String, dynamic>)).toList();
+      _value = _result.data!
+          .map((dynamic i) => PostModel.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -174,9 +176,42 @@ class _ApiService implements ApiService {
     return _value;
   }
 
+  @override
+  Future<List<CommentModel>> getComments(String postId, String token) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<List<CommentModel>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'comments/${postId}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<CommentModel> _value;
+    try {
+      _value = _result.data!
+          .map(
+            (dynamic i) => CommentModel.fromJson(i as Map<String, dynamic>),
+          )
+          .toList();
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
-        !(requestOptions.responseType == ResponseType.bytes || requestOptions.responseType == ResponseType.stream)) {
+        !(requestOptions.responseType == ResponseType.bytes ||
+            requestOptions.responseType == ResponseType.stream)) {
       if (T == String) {
         requestOptions.responseType = ResponseType.plain;
       } else {

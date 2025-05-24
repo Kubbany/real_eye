@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_eye/Features/posts/presentation/widgets/post_creation_details.dart';
+
 import 'package:real_eye/core/utils/app_router.dart';
 import 'package:real_eye/core/widgets/custom_button.dart';
 import 'package:real_eye/Features/posts/domain/entities/post_entity.dart';
@@ -39,8 +40,10 @@ class PostItem extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: CustomButton(
                 title: "Comment",
-                onPressed: () {
-                  GoRouter.of(context).push(AppRouter.kCommentsView, extra: post);
+                onPressed: () async {
+                  if (context.mounted) {
+                    GoRouter.of(context).push(AppRouter.kCommentsView, extra: post);
+                  }
                 },
                 borderRadius: 64,
                 backgroundColor: const Color(0xff183cc5),

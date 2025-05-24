@@ -5,7 +5,9 @@ import 'package:real_eye/Features/contact_us/data/repos/contact_us_repo_impl.dar
 import 'package:real_eye/Features/contact_us/domain/repos/contact_us_repo.dart';
 import 'package:real_eye/Features/create_post/data/repos/create_post_repo_impl.dart';
 import 'package:real_eye/Features/create_post/domain/entities/create_post_repo.dart';
+import 'package:real_eye/Features/posts/data/repos/comments_repo_impl.dart';
 import 'package:real_eye/Features/posts/data/repos/posts_repo_impl.dart';
+import 'package:real_eye/Features/posts/domain/repos/comments_repo.dart';
 import 'package:real_eye/Features/posts/domain/repos/posts_repo.dart';
 import 'package:real_eye/core/services/api_service.dart';
 import 'package:real_eye/core/services/dio_factory.dart';
@@ -35,6 +37,11 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<CreatePostRepo>(
     CreatePostRepoImpl(
+      api: getIt<ApiService>(),
+    ),
+  );
+  getIt.registerSingleton<CommentsRepo>(
+    CommentsRepoImpl(
       api: getIt<ApiService>(),
     ),
   );
