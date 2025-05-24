@@ -4,6 +4,8 @@ import 'package:real_eye/Features/authentication/data/models/login_response.dart
 import 'package:real_eye/Features/authentication/data/models/register_request.dart';
 import 'package:real_eye/Features/authentication/data/models/user_model.dart';
 import 'package:real_eye/Features/contact_us/data/models/message_model.dart';
+import 'package:real_eye/Features/create_post/data/models/create_post_request.dart';
+import 'package:real_eye/Features/create_post/data/models/create_post_response.dart';
 import 'package:real_eye/Features/posts/data/models/post_model.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -27,4 +29,7 @@ abstract class ApiService {
 
   @GET("posts")
   Future<List<PostModel>> getPosts(@Header("Authorization") String token);
+
+  @POST('posts')
+  Future<CreatePostResponse> createPost(@Header('Authorization') String token, @Body() CreatePostRequest request);
 }
