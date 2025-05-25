@@ -15,12 +15,12 @@ class ContactUsCubit extends Cubit<ContactUsState> {
   final TextEditingController message = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool ignoreValidation = false;
-  ContactUsCubit(this.contactUsRepo) : super(const ContactUsState.initial());
+  ContactUsCubit(this.contactUsRepo) : super(ContactUsStateInitial());
   final ContactUsRepo contactUsRepo;
   Future<void> sendMessage() async {
     ignoreValidation = false;
     if (formKey.currentState!.validate()) {
-      safeEmit(const ContactUsState.loading());
+      safeEmit(ContactUsStateLoading());
       final MessageModel messageModel = MessageModel(fullname: fullName.text, email: email.text, message: message.text);
       final result = await contactUsRepo.sendMessage(message: messageModel);
 
@@ -30,9 +30,9 @@ class ContactUsCubit extends Cubit<ContactUsState> {
           email.clear();
           message.clear();
           ignoreValidation = true;
-          safeEmit(const ContactUsState.success());
+          safeEmit(ContactUsStateSuccess());
         case Fail(:final fail):
-          safeEmit(ContactUsState.failure(fail.errorMessage));
+          safeEmit(ContactUsStateFailure(errorMessage: fail.errorMessage));
       }
     }
   }
