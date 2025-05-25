@@ -13,6 +13,12 @@ final class PostsSuccess extends PostsState {
   PostsSuccess({required this.posts});
 }
 
+final class PostDeletedSuccess extends PostsState {
+  final String message;
+  final List<PostEntity> remainingPosts;
+  PostDeletedSuccess({required this.message, required this.remainingPosts});
+}
+
 final class PostsFailure extends PostsState {
   final String errorMessage;
 

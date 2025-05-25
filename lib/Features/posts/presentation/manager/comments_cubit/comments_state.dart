@@ -21,6 +21,16 @@ final class CommentCreatedSuccess extends CommentsState {
   CommentCreatedSuccess({required this.commentId});
 }
 
+final class CommentDeletedSuccess extends CommentsState {
+  final String message;
+  final String commentId;
+
+  CommentDeletedSuccess({
+    required this.message,
+    required this.commentId,
+  });
+}
+
 final class CommentsFailure extends CommentsState {
   final String errorMessage;
 

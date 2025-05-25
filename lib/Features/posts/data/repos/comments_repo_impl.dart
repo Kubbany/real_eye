@@ -43,4 +43,16 @@ class CommentsRepoImpl implements CommentsRepo {
       return Result.fail(ErrorHandler.handle(e));
     }
   }
+
+  @override
+  Future<Result<void>> deleteComment(String commentId) async {
+    try {
+      final userModel = await UserManagerService.instance.getLoginResponse();
+      final String token = userModel!.token;
+      await api.deleteComment(commentId, 'Bearer $token');
+      return const Result.success(null);
+    } catch (e) {
+      return Result.fail(ErrorHandler.handle(e));
+    }
+  }
 }

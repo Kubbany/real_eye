@@ -10,6 +10,8 @@ import 'package:real_eye/Features/posts/data/models/comment_model.dart';
 import 'package:real_eye/Features/posts/data/models/create_comment_request.dart';
 import 'package:real_eye/Features/posts/data/models/create_comment_response.dart';
 import 'package:real_eye/Features/posts/data/models/post_model.dart';
+import 'package:real_eye/Features/profile/data/models/delete_comment_response.dart';
+import 'package:real_eye/Features/profile/data/models/delete_post_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'api_service.g.dart';
@@ -42,4 +44,16 @@ abstract class ApiService {
   @POST("comments")
   Future<CreateCommentResponse> createComment(
       @Header("Authorization") String token, @Body() CreateCommentRequest request);
+
+  @DELETE("posts/{postId}")
+  Future<DeletePostResponse> deletePost(
+    @Path("postId") String postId,
+    @Header("Authorization") String token,
+  );
+
+  @DELETE("comments/{commentId}")
+  Future<DeleteCommentResponse> deleteComment(
+    @Path("commentId") String commentId,
+    @Header("Authorization") String token,
+  );
 }

@@ -45,6 +45,31 @@ class CommentsCubit extends Cubit<CommentsState> {
     }
   }
 
+  Future<void> deleteComment({
+    required String commentId,
+    required String postId,
+  }) async {
+    safeEmit(CommentsLoading());
+    final result = await commentsRepo.deleteComment(commentId);
+    switch (result) {
+      case Success():
+        // Optimistically remove the comment from local state
+        final currentState = state;
+        if (currentState is CommentsSuccess) {
+          final updatedComments = currentState.comments.where((comment) => comment.id != commentId).toList();
+          safeEmit(CommentsSuccess(comments: updatedComments));
+        }
+        safeEmit(CommentDeletedSuccess(
+          message: 'Comment deleted successfully',
+          commentId: commentId,
+        ));
+        // Optional: Refresh from server
+        getComments(postId);
+      case Fail(:final fail):
+        safeEmit(CommentsFailure(errorMessage: fail.errorMessage));
+    }
+  }
+
   @override
   Future<void> close() {
     comment.dispose();

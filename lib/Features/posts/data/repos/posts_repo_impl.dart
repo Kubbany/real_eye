@@ -21,4 +21,16 @@ class PostsRepoImpl extends PostsRepo {
       return Result.fail(ErrorHandler.handle(e));
     }
   }
+
+  @override
+  Future<Result<void>> deletePost(String postId) async {
+    try {
+      final userModel = await UserManagerService.instance.getLoginResponse();
+      final String token = userModel!.token;
+      await api.deletePost(postId, 'Bearer $token');
+      return const Result.success(null);
+    } catch (e) {
+      return Result.fail(ErrorHandler.handle(e));
+    }
+  }
 }

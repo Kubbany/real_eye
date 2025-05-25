@@ -11,6 +11,7 @@ import 'package:real_eye/Features/deepfake_detection/presentation/views/deepfake
 import 'package:real_eye/Features/knowledge_center/presentation/views/knowledge_center_view.dart';
 import 'package:real_eye/Features/posts/presentation/views/comments_view.dart';
 import 'package:real_eye/Features/posts/presentation/views/posts_view.dart';
+import 'package:real_eye/Features/profile/presentation/views/profile_comments_view.dart';
 import 'package:real_eye/Features/profile/presentation/views/profile_posts_view.dart';
 import 'package:real_eye/Features/splash/presentation/views/splash_view.dart';
 import 'package:real_eye/features/home/presentation/views/home_view.dart';
@@ -29,6 +30,7 @@ abstract class AppRouter {
   static const kPostsView = "/postsView";
   static const kProfilePostsView = "/profilePostsView";
   static const kCommentsView = "/commentsView";
+  static const kProfileCommentsView = "/profileCommentsView";
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -124,6 +126,13 @@ abstract class AppRouter {
         pageBuilder: (context, state) => slidingNavigation(
           state,
           const CommentsView(),
+        ),
+      ),
+      GoRoute(
+        path: kProfileCommentsView,
+        pageBuilder: (context, state) => slidingNavigation(
+          state,
+          const ProfileCommentsView(),
         ),
       ),
     ],

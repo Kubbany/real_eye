@@ -12,20 +12,20 @@ class PostsListView extends StatelessWidget {
     return BlocBuilder<PostsCubit, PostsState>(
       builder: (context, state) {
         if (state is PostsSuccess) {
+          if (state.posts.isEmpty) {
+            return const Center(
+              child: Text(
+                "No Posts Available Yet",
+                style: TextStyle(fontSize: 20, color: Colors.grey),
+              ),
+            );
+          }
           return ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemCount: state.posts.length,
-            itemBuilder: (context, index) => state.posts.isNotEmpty
-                ? PostItem(
+              physics: const BouncingScrollPhysics(),
+              itemCount: state.posts.length,
+              itemBuilder: (context, index) => PostItem(
                     post: state.posts[(state.posts.length - 1) - index],
-                  )
-                : const Center(
-                    child: Text(
-                      "No Posts Available Yet",
-                      style: TextStyle(fontSize: 20, color: Colors.grey),
-                    ),
-                  ),
-          );
+                  ));
         } else if (state is PostsFailure) {
           return Center(
             child: Text(state.errorMessage),

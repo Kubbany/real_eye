@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:real_eye/Features/posts/presentation/manager/post_cubit/posts_cubit.dart';
 import 'package:real_eye/Features/posts/presentation/widgets/post_creation_details.dart';
 
 import 'package:real_eye/core/utils/app_router.dart';
@@ -44,7 +46,14 @@ class ProfilePostItem extends StatelessWidget {
                 children: <Widget>[
                   CustomButton(
                     title: "Delete",
-                    onPressed: () {},
+                    onPressed: () async {
+                      final shouldDelete = await _showDeleteDialog(context);
+                      if (shouldDelete == true) {
+                        if (context.mounted) {
+                          context.read<PostsCubit>().deletePost(post.id);
+                        }
+                      }
+                    },
                     borderRadius: 64,
                     backgroundColor: Colors.red,
                   ),
@@ -52,7 +61,7 @@ class ProfilePostItem extends StatelessWidget {
                     title: "Comment",
                     onPressed: () async {
                       if (context.mounted) {
-                        GoRouter.of(context).push(AppRouter.kCommentsView, extra: post);
+                        GoRouter.of(context).push(AppRouter.kProfileCommentsView, extra: post);
                       }
                     },
                     borderRadius: 64,
@@ -77,6 +86,26 @@ class ProfilePostItem extends StatelessWidget {
     if (difference.inDays < 7) return '${difference.inDays}d ago';
 
     return '${date.day}/${date.month}/${date.year % 100}';
+  }
+
+  Future<bool?> _showDeleteDialog(BuildContext context) async {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Delete Post'),
+        content: const Text('Are you sure you want to delete this post?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Delete', style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
   }
 }
 

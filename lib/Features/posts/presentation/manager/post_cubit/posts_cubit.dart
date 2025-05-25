@@ -11,6 +11,7 @@ class PostsCubit extends Cubit<PostsState> {
   final PostsRepo postRepo;
 
   PostsCubit(this.postRepo) : super(PostsInitial());
+  List<PostEntity> currentUserPosts = [];
 
   Future<void> getPosts() async {
     safeEmit(PostsLoading());
@@ -30,16 +31,29 @@ class PostsCubit extends Cubit<PostsState> {
     var user = await UserManagerService.instance.getUserModel();
 
     final posts = await postRepo.getPosts();
-    List<PostEntity> currentUserPosts = [];
+
     switch (posts) {
       case Success():
-        for (var post in posts.data) {
-          if (user!.userID == post.userID) {
-            currentUserPosts.add(post);
-          }
-        }
+        currentUserPosts = posts.data.where((post) => post.userID == user?.userID).toList();
         safeEmit(PostsSuccess(posts: currentUserPosts));
 
+      case Fail(:final fail):
+        safeEmit(PostsFailure(errorMessage: fail.errorMessage));
+    }
+  }
+
+  Future<void> deletePost(String postId) async {
+    safeEmit(PostsLoading());
+    final result = await postRepo.deletePost(postId);
+    switch (result) {
+      case Success():
+        currentUserPosts.removeWhere((post) => post.id == postId);
+        safeEmit(
+          PostDeletedSuccess(
+            message: 'Post deleted successfully',
+            remainingPosts: currentUserPosts,
+          ),
+        );
       case Fail(:final fail):
         safeEmit(PostsFailure(errorMessage: fail.errorMessage));
     }

@@ -7,6 +7,7 @@ extension CommentMapper on CommentModel {
       id: id,
       text: text,
       authorId: author,
+      postId: postID,
       createdAt: createdAt,
     );
   }
