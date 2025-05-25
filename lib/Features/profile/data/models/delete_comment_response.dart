@@ -9,8 +9,8 @@ class DeleteCommentResponse {
 
   factory DeleteCommentResponse.fromJson(Map<String, dynamic> json) {
     return DeleteCommentResponse(
-      success: json['success'],
-      message: json['message'],
+      success: json['success'] == true || json['success'] == 'true',
+      message: json['message']?.toString() ?? 'Success',
     );
   }
 }

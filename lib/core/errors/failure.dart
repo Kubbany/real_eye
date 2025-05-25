@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -33,9 +34,10 @@ class ServerFailure extends Failure {
   }
   factory ServerFailure.fromResponse(int statusCode, dynamic response) {
     if (statusCode == 404) {
-      String message = "Request Not Found";
-      if (response['message'] == "User not found") {
-        message = "Incorrect email or password";
+      String message = "Request not found";
+      log(response['message']);
+      if (response['message'] != message) {
+        message = response['message'];
       }
       return ServerFailure(errorMessage: message);
     } else if (statusCode >= 500) {
