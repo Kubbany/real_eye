@@ -14,59 +14,62 @@ class SignInFormSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginCubit, LoginState>(listener: (context, state) async {
-      if (state is LoginStateSuccess) {
-        await UserManagerService.instance.setUserModel(state.user);
-        if (context.mounted) {
-          GoRouter.of(context).go(AppRouter.kChatFakeDetectionView, extra: state.user);
-          showSnackBarMessage(context, "Logged In Successfuly!");
+    return BlocConsumer<LoginCubit, LoginState>(
+      listener: (context, state) async {
+        if (state is LoginStateSuccess) {
+          await UserManagerService.instance.setUserModel(state.user);
+          if (context.mounted) {
+            GoRouter.of(context).go(AppRouter.kChatFakeDetectionView, extra: state.user);
+            showSnackBarMessage(context, "Logged In Successfuly!");
+          }
         }
-      }
-      if (state is LoginStateFailure) {
-        if (context.mounted) {
-          showSnackBarMessage(context, state.errorMessage);
+        if (state is LoginStateFailure) {
+          if (context.mounted) {
+            showSnackBarMessage(context, state.errorMessage);
+          }
         }
-      }
-    }, builder: (context, state) {
-      return AbsorbPointer(
-        absorbing: state is LoginStateLoading,
-        child: Form(
-          key: context.read<LoginCubit>().formKey,
-          child: Column(
-            children: <Widget>[
-              LabeledTextField(
-                label: "Email Address",
-                hint: "Enter Your Email",
-                textEditingController: context.read<LoginCubit>().email,
-                validator: AppValidators.emailValidation,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              LabeledTextField(
-                label: "Password",
-                isPasswordField: true,
-                hint: "Enter Your Password",
-                textEditingController: context.read<LoginCubit>().password,
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              CustomButton(
-                isLoading: state is LoginStateLoading,
-                title: "Sign In",
-                titleSize: 18,
-                buttonHeight: 50,
-                onPressed: () {
-                  context.read<LoginCubit>().login();
-                },
-                borderRadius: 8,
-                backgroundColor: const Color(0xff264cf7),
-              ),
-            ],
+      },
+      builder: (context, state) {
+        return AbsorbPointer(
+          absorbing: state is LoginStateLoading,
+          child: Form(
+            key: context.read<LoginCubit>().formKey,
+            child: Column(
+              children: <Widget>[
+                LabeledTextField(
+                  label: "Email Address",
+                  hint: "Enter Your Email",
+                  textEditingController: context.read<LoginCubit>().email,
+                  validator: AppValidators.emailValidation,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                LabeledTextField(
+                  label: "Password",
+                  isPasswordField: true,
+                  hint: "Enter Your Password",
+                  textEditingController: context.read<LoginCubit>().password,
+                ),
+                const SizedBox(
+                  height: 25,
+                ),
+                CustomButton(
+                  isLoading: state is LoginStateLoading,
+                  title: "Sign In",
+                  titleSize: 18,
+                  buttonHeight: 50,
+                  onPressed: () {
+                    context.read<LoginCubit>().login();
+                  },
+                  borderRadius: 8,
+                  backgroundColor: const Color(0xff264cf7),
+                ),
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }

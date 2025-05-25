@@ -54,15 +54,18 @@ class CreatePostViewBody extends StatelessWidget {
                               }
                             },
                             builder: (context, state) {
-                              return CustomButton(
-                                isLoading: state is CreatePostLoading,
-                                title: "Submit Post",
-                                onPressed: () {
-                                  context.read<CreatePostCubit>().createPost();
-                                },
-                                borderRadius: 8,
-                                backgroundColor: const Color(0xff183dc9),
-                                buttonHeight: 50,
+                              return AbsorbPointer(
+                                absorbing: state is CreatePostLoading,
+                                child: CustomButton(
+                                  isLoading: state is CreatePostLoading,
+                                  title: "Submit Post",
+                                  onPressed: () {
+                                    context.read<CreatePostCubit>().createPost();
+                                  },
+                                  borderRadius: 8,
+                                  backgroundColor: const Color(0xff183dc9),
+                                  buttonHeight: 50,
+                                ),
                               );
                             },
                           ),
