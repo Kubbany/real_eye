@@ -37,7 +37,7 @@ class ProfilePostsListView extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               itemCount: posts.length,
               itemBuilder: (context, index) => ProfilePostItem(
-                    post: posts[(posts.length - 1) - index],
+                    post: posts[index],
                   ));
         } else if (state is PostsFailure) {
           return Center(

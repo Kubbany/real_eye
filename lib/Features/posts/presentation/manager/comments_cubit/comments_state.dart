@@ -36,3 +36,9 @@ final class CommentsFailure extends CommentsState {
 
   CommentsFailure({required this.errorMessage});
 }
+
+final class CommentCreatedFailure extends CommentsState {
+  final String errorMessage;
+
+  CommentCreatedFailure({required this.errorMessage});
+}

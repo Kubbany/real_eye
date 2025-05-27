@@ -40,7 +40,7 @@ class CommentsCubit extends Cubit<CommentsState> {
           safeEmit(CommentCreatedSuccess(commentId: result.data));
           getComments(postId); // Refresh comments list
         case Fail(:final fail):
-          safeEmit(CommentsFailure(errorMessage: fail.errorMessage));
+          safeEmit(CommentCreatedFailure(errorMessage: fail.errorMessage));
       }
     }
   }

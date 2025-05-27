@@ -24,7 +24,7 @@ class PostsListView extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               itemCount: state.posts.length,
               itemBuilder: (context, index) => PostItem(
-                    post: state.posts[(state.posts.length - 1) - index],
+                    post: state.posts[index],
                   ));
         } else if (state is PostsFailure) {
           return Center(

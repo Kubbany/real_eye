@@ -51,7 +51,7 @@ class ProfileCommentsViewBody extends StatelessWidget {
                         context.read<CommentsCubit>().comment.clear();
                         showSnackBarMessage(context, "Comment Added Successfuly!");
                         context.read<CommentsCubit>().formKey.currentState!.reset();
-                      } else if (state is CommentsFailure) {
+                      } else if (state is CommentCreatedFailure) {
                         showSnackBarMessage(context, state.errorMessage);
                       }
                     },
