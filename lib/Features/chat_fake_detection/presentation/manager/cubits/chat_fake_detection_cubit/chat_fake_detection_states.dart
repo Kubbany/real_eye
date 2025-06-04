@@ -8,10 +8,16 @@ final class ChatFakeDetectionInitial extends ChatFakeDetectionStates {}
 
 final class ChatFakeDetectionLoading extends ChatFakeDetectionStates {}
 
-final class ChatFakeDetectionSuccess extends ChatFakeDetectionStates {
+final class ChatFakeDetectionImageSuccess extends ChatFakeDetectionStates {
   final List<ImagePredictionEntity> response;
 
-  ChatFakeDetectionSuccess({required this.response});
+  ChatFakeDetectionImageSuccess({required this.response});
+}
+
+final class ChatFakeDetectionVideoSuccess extends ChatFakeDetectionStates {
+  final List<VideoPredictionEntity> response;
+
+  ChatFakeDetectionVideoSuccess({required this.response});
 }
 
 final class ChatFakeDetectionFailure extends ChatFakeDetectionStates {

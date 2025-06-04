@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:real_eye/Features/chat_fake_detection/data/models/image_prediction_model.dart';
+import 'package:real_eye/Features/chat_fake_detection/data/models/video_prediction_model.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'flask_service.g.dart';
@@ -15,5 +16,12 @@ abstract class FlaskService {
   Future<List<ImagePredictionModel>> predictImage(
     @Header('Authorization') String token,
     @Part() File image,
+  );
+
+  @MultiPart()
+  @POST('/predict_video')
+  Future<List<VideoPredictionModel>> predictVideo(
+    @Header('Authorization') String token,
+    @Part() File video,
   );
 }
