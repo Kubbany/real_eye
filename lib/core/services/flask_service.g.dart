@@ -10,7 +10,7 @@ part of 'flask_service.dart';
 
 class _FlaskService implements FlaskService {
   _FlaskService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'http://192.168.1.3:5000/';
+    baseUrl ??= 'http://192.168.1.8:5000/';
   }
 
   final Dio _dio;
@@ -20,7 +20,7 @@ class _FlaskService implements FlaskService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<List<PredictionModel>> predictImage(File image) async {
+  Future<List<ImagePredictionModel>> predictImage(File image) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -34,7 +34,7 @@ class _FlaskService implements FlaskService {
         ),
       ),
     );
-    final _options = _setStreamType<List<PredictionModel>>(
+    final _options = _setStreamType<List<ImagePredictionModel>>(
       Options(
         method: 'POST',
         headers: _headers,
@@ -43,18 +43,19 @@ class _FlaskService implements FlaskService {
       )
           .compose(
             _dio.options,
-            'predict',
+            '/predict',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<PredictionModel> _value;
+    late List<ImagePredictionModel> _value;
     try {
       _value = _result.data!
           .map(
-            (dynamic i) => PredictionModel.fromJson(i as Map<String, dynamic>),
+            (dynamic i) =>
+                ImagePredictionModel.fromJson(i as Map<String, dynamic>),
           )
           .toList();
     } on Object catch (e, s) {
@@ -65,7 +66,7 @@ class _FlaskService implements FlaskService {
   }
 
   @override
-  Future<List<PredictionModel>> predictVideo(File video) async {
+  Future<List<VideoPredictionModel>> predictVideo(File video) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -79,7 +80,7 @@ class _FlaskService implements FlaskService {
         ),
       ),
     );
-    final _options = _setStreamType<List<PredictionModel>>(
+    final _options = _setStreamType<List<VideoPredictionModel>>(
       Options(
         method: 'POST',
         headers: _headers,
@@ -88,18 +89,19 @@ class _FlaskService implements FlaskService {
       )
           .compose(
             _dio.options,
-            'predict_video',
+            '/predict_video',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<PredictionModel> _value;
+    late List<VideoPredictionModel> _value;
     try {
       _value = _result.data!
           .map(
-            (dynamic i) => PredictionModel.fromJson(i as Map<String, dynamic>),
+            (dynamic i) =>
+                VideoPredictionModel.fromJson(i as Map<String, dynamic>),
           )
           .toList();
     } on Object catch (e, s) {
@@ -110,30 +112,31 @@ class _FlaskService implements FlaskService {
   }
 
   @override
-  Future<List<PredictionModel>> predictImageUrl(
-    Map<String, String> body,
+  Future<List<ImagePredictionModel>> predictFromUrl(
+    UrlPredictionRequest request,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body);
-    final _options = _setStreamType<List<PredictionModel>>(
+    _data.addAll(request.toJson());
+    final _options = _setStreamType<List<ImagePredictionModel>>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'predict_url',
+            '/predict_url',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<PredictionModel> _value;
+    late List<ImagePredictionModel> _value;
     try {
       _value = _result.data!
           .map(
-            (dynamic i) => PredictionModel.fromJson(i as Map<String, dynamic>),
+            (dynamic i) =>
+                ImagePredictionModel.fromJson(i as Map<String, dynamic>),
           )
           .toList();
     } on Object catch (e, s) {
@@ -145,7 +148,8 @@ class _FlaskService implements FlaskService {
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
-        !(requestOptions.responseType == ResponseType.bytes || requestOptions.responseType == ResponseType.stream)) {
+        !(requestOptions.responseType == ResponseType.bytes ||
+            requestOptions.responseType == ResponseType.stream)) {
       if (T == String) {
         requestOptions.responseType = ResponseType.plain;
       } else {

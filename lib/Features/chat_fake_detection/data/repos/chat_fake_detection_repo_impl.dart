@@ -8,7 +8,6 @@ import 'package:real_eye/Features/chat_fake_detection/domain/entities/video_pred
 import 'package:real_eye/Features/chat_fake_detection/domain/repos/chat_fake_detection_repo.dart';
 import 'package:real_eye/core/errors/failure.dart';
 import 'package:real_eye/core/services/flask_service.dart';
-import 'package:real_eye/core/services/user_manager_service.dart';
 import 'package:real_eye/core/utils/result.dart';
 
 class ChatFakeDetectionRepoImpl implements ChatFakeDetectionRepo {
@@ -19,9 +18,7 @@ class ChatFakeDetectionRepoImpl implements ChatFakeDetectionRepo {
   @override
   Future<Result<List<ImagePredictionEntity>>> predictImage(File image) async {
     try {
-      final userModel = await UserManagerService.instance.getLoginResponse();
-      final String token = userModel!.token;
-      final response = await flaskApi.predictImage('Bearer $token', image);
+      final response = await flaskApi.predictImage(image);
       return Result.success(response.toDomain());
     } catch (e) {
       return Result.fail(ErrorHandler.handle(e));
@@ -31,9 +28,7 @@ class ChatFakeDetectionRepoImpl implements ChatFakeDetectionRepo {
   @override
   Future<Result<List<VideoPredictionEntity>>> predictVideo(File video) async {
     try {
-      final userModel = await UserManagerService.instance.getLoginResponse();
-      final String token = userModel!.token;
-      final response = await flaskApi.predictVideo('Bearer $token', video);
+      final response = await flaskApi.predictVideo(video);
       return Result.success(response.toDomain());
     } catch (e) {
       return Result.fail(ErrorHandler.handle(e));
@@ -43,10 +38,7 @@ class ChatFakeDetectionRepoImpl implements ChatFakeDetectionRepo {
   @override
   Future<Result<List<ImagePredictionEntity>>> predictFromUrl(String imageUrl) async {
     try {
-      final userModel = await UserManagerService.instance.getLoginResponse();
-      final String token = userModel!.token;
       final response = await flaskApi.predictFromUrl(
-        'Bearer $token',
         UrlPredictionRequest(imageUrl: imageUrl),
       );
       return Result.success(response.toDomain());

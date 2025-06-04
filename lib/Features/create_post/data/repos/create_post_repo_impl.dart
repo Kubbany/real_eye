@@ -2,7 +2,6 @@ import 'package:real_eye/Features/create_post/data/models/create_post_request.da
 import 'package:real_eye/Features/create_post/domain/entities/create_post_repo.dart';
 import 'package:real_eye/core/errors/failure.dart';
 import 'package:real_eye/core/services/api_service.dart';
-import 'package:real_eye/core/services/user_manager_service.dart';
 import 'package:real_eye/core/utils/result.dart';
 
 class CreatePostRepoImpl extends CreatePostRepo {
@@ -12,10 +11,7 @@ class CreatePostRepoImpl extends CreatePostRepo {
   @override
   Future<Result<String>> createPost({required String description}) async {
     try {
-      final userModel = await UserManagerService.instance.getLoginResponse();
-      final token = userModel!.token;
       final response = await api.createPost(
-        'Bearer $token',
         CreatePostRequest(desc: description),
       );
       return Result.success(response.postID);

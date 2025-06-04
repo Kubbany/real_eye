@@ -16,7 +16,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'api_service.g.dart';
 
-@RestApi(baseUrl: 'http://192.168.1.2:5555/api/')
+@RestApi(baseUrl: 'http://192.168.1.8:5555/api/')
 abstract class ApiService {
   factory ApiService(Dio dio, {String? baseUrl}) = _ApiService;
 
@@ -33,27 +33,24 @@ abstract class ApiService {
   Future<UserModel> getCurrentUser();
 
   @GET("posts")
-  Future<List<PostModel>> getPosts(@Header("Authorization") String token);
+  Future<List<PostModel>> getPosts();
 
   @POST('posts')
-  Future<CreatePostResponse> createPost(@Header('Authorization') String token, @Body() CreatePostRequest request);
+  Future<CreatePostResponse> createPost(@Body() CreatePostRequest request);
 
   @GET("comments/{postId}")
-  Future<List<CommentModel>> getComments(@Path("postId") String postId, @Header("Authorization") String token);
+  Future<List<CommentModel>> getComments(@Path("postId") String postId);
 
   @POST("comments")
-  Future<CreateCommentResponse> createComment(
-      @Header("Authorization") String token, @Body() CreateCommentRequest request);
+  Future<CreateCommentResponse> createComment(@Body() CreateCommentRequest request);
 
   @DELETE("posts/{postId}")
   Future<DeletePostResponse> deletePost(
     @Path("postId") String postId,
-    @Header("Authorization") String token,
   );
 
   @DELETE("comments/{commentId}")
   Future<DeleteCommentResponse> deleteComment(
     @Path("commentId") String commentId,
-    @Header("Authorization") String token,
   );
 }

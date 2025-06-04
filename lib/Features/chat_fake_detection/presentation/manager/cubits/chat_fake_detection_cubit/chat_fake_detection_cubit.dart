@@ -37,7 +37,6 @@ class ChatFakeDetectionCubit extends Cubit<ChatFakeDetectionStates> {
     }
   }
 
-  // Add to your ChatFakeDetectionCubit class
   Future<void> predictFromUrl(String imageUrl) async {
     safeEmit(ChatFakeDetectionLoading());
     final result = await chatFakeDetectionRepo.predictFromUrl(imageUrl);

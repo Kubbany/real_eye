@@ -10,7 +10,7 @@ part of 'api_service.dart';
 
 class _ApiService implements ApiService {
   _ApiService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'http://192.168.1.2:5555/api/';
+    baseUrl ??= 'http://192.168.1.8:5555/api/';
   }
 
   final Dio _dio;
@@ -115,11 +115,10 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<PostModel>> getPosts(String token) async {
+  Future<List<PostModel>> getPosts() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<List<PostModel>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
@@ -145,14 +144,10 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<CreatePostResponse> createPost(
-    String token,
-    CreatePostRequest request,
-  ) async {
+  Future<CreatePostResponse> createPost(CreatePostRequest request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(request.toJson());
     final _options = _setStreamType<CreatePostResponse>(
@@ -177,11 +172,10 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<CommentModel>> getComments(String postId, String token) async {
+  Future<List<CommentModel>> getComments(String postId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<List<CommentModel>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
@@ -210,13 +204,11 @@ class _ApiService implements ApiService {
 
   @override
   Future<CreateCommentResponse> createComment(
-    String token,
     CreateCommentRequest request,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(request.toJson());
     final _options = _setStreamType<CreateCommentResponse>(
@@ -241,11 +233,10 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<DeletePostResponse> deletePost(String postId, String token) async {
+  Future<DeletePostResponse> deletePost(String postId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<DeletePostResponse>(
       Options(method: 'DELETE', headers: _headers, extra: _extra)
@@ -269,14 +260,10 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<DeleteCommentResponse> deleteComment(
-    String commentId,
-    String token,
-  ) async {
+  Future<DeleteCommentResponse> deleteComment(String commentId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<DeleteCommentResponse>(
       Options(method: 'DELETE', headers: _headers, extra: _extra)
