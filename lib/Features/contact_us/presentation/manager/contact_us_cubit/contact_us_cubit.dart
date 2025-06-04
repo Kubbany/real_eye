@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:real_eye/Features/contact_us/data/models/message_model.dart';
 import 'package:real_eye/Features/contact_us/domain/repos/contact_us_repo.dart';
 import 'package:real_eye/core/extensions/safe_emit.dart';
 import 'package:real_eye/core/utils/result.dart';
 
 part 'contact_us_state.dart';
-part 'contact_us_cubit.freezed.dart';
 
 class ContactUsCubit extends Cubit<ContactUsState> {
   final TextEditingController fullName = TextEditingController();
