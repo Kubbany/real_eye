@@ -2,6 +2,7 @@
 import 'dart:io';
 import 'package:real_eye/Features/chat_fake_detection/data/mappers/image_prediction_mapper.dart';
 import 'package:real_eye/Features/chat_fake_detection/data/mappers/video_prediction_mapper.dart';
+import 'package:real_eye/Features/chat_fake_detection/data/models/url_prediction_request.dart';
 import 'package:real_eye/Features/chat_fake_detection/domain/entities/image_prediction_entity.dart';
 import 'package:real_eye/Features/chat_fake_detection/domain/entities/video_prediction_entity.dart';
 import 'package:real_eye/Features/chat_fake_detection/domain/repos/chat_fake_detection_repo.dart';
@@ -33,6 +34,21 @@ class ChatFakeDetectionRepoImpl implements ChatFakeDetectionRepo {
       final userModel = await UserManagerService.instance.getLoginResponse();
       final String token = userModel!.token;
       final response = await flaskApi.predictVideo('Bearer $token', video);
+      return Result.success(response.toDomain());
+    } catch (e) {
+      return Result.fail(ErrorHandler.handle(e));
+    }
+  }
+
+  @override
+  Future<Result<List<ImagePredictionEntity>>> predictFromUrl(String imageUrl) async {
+    try {
+      final userModel = await UserManagerService.instance.getLoginResponse();
+      final String token = userModel!.token;
+      final response = await flaskApi.predictFromUrl(
+        'Bearer $token',
+        UrlPredictionRequest(imageUrl: imageUrl),
+      );
       return Result.success(response.toDomain());
     } catch (e) {
       return Result.fail(ErrorHandler.handle(e));

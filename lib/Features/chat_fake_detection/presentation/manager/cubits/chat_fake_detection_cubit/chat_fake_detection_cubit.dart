@@ -36,4 +36,16 @@ class ChatFakeDetectionCubit extends Cubit<ChatFakeDetectionStates> {
         safeEmit(ChatFakeDetectionFailure(errorMessage: fail.errorMessage));
     }
   }
+
+  // Add to your ChatFakeDetectionCubit class
+  Future<void> predictFromUrl(String imageUrl) async {
+    safeEmit(ChatFakeDetectionLoading());
+    final result = await chatFakeDetectionRepo.predictFromUrl(imageUrl);
+    switch (result) {
+      case Success():
+        safeEmit(ChatFakeDetectionImageSuccess(response: result.data));
+      case Fail(:final fail):
+        safeEmit(ChatFakeDetectionFailure(errorMessage: fail.errorMessage));
+    }
+  }
 }

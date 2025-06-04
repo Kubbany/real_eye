@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:real_eye/Features/chat_fake_detection/data/models/image_prediction_model.dart';
+import 'package:real_eye/Features/chat_fake_detection/data/models/url_prediction_request.dart';
 import 'package:real_eye/Features/chat_fake_detection/data/models/video_prediction_model.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -23,5 +24,11 @@ abstract class FlaskService {
   Future<List<VideoPredictionModel>> predictVideo(
     @Header('Authorization') String token,
     @Part() File video,
+  );
+
+  @POST('/predict_url')
+  Future<List<ImagePredictionModel>> predictFromUrl(
+    @Header('Authorization') String token,
+    @Body() UrlPredictionRequest request,
   );
 }
