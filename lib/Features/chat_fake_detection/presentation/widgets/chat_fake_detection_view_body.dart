@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:real_eye/Features/chat_fake_detectoin/presentation/widgets/chat_list_view.dart';
-import 'package:real_eye/Features/chat_fake_detectoin/presentation/widgets/media_upload_text_field.dart';
+import 'package:real_eye/Features/chat_fake_detection/presentation/widgets/chat_list_view.dart';
+import 'package:real_eye/Features/chat_fake_detection/presentation/widgets/media_upload_text_field.dart';
 import 'package:real_eye/core/widgets/custom_gradient_header.dart';
 import 'package:real_eye/core/widgets/user_app_bar.dart';
 

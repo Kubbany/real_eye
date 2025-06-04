@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_eye/Features/authentication/data/models/user_model.dart';
-import 'package:real_eye/Features/chat_fake_detectoin/presentation/widgets/user_avatar.dart';
+import 'package:real_eye/Features/chat_fake_detection/presentation/widgets/user_avatar.dart';
 import 'package:real_eye/core/utils/app_router.dart';
 import 'package:real_eye/core/widgets/custom_drawer_button.dart';
 import 'package:real_eye/core/widgets/custom_logout_button.dart';
