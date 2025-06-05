@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:real_eye/Features/knowledge_center/domain/entites/deepfake_case_entity.dart';
 import 'package:real_eye/Features/knowledge_center/presentation/widgets/knowledge_center_case_card.dart';
 import 'package:real_eye/Features/knowledge_center/presentation/widgets/knowledge_center_header_image.dart';
+import 'package:real_eye/core/utils/methods/luanch_custom_url.dart';
 import 'package:real_eye/core/widgets/custom_button.dart';
 
 class DeepfakeCaseCard extends StatelessWidget {
@@ -24,7 +25,9 @@ class DeepfakeCaseCard extends StatelessWidget {
           ),
           CustomButton(
             title: "Read More",
-            onPressed: () {},
+            onPressed: () {
+              luanchCustomUrl(context, deepFakeCase.articleURL);
+            },
             borderRadius: 12,
             backgroundColor: const Color(0xff183ccb),
           ),

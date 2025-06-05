@@ -1,4 +1,3 @@
-// features/chat_fake_detection/domain/entities/video_prediction_entity.dart
 class VideoPredictionEntity {
   final String model;
   final int fakeFramesCount;
