@@ -1,5 +1,5 @@
 // features/chat/presentation/cubit/chat_cubit.dart
-import 'dart:developer';
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,14 +47,6 @@ class ChatCubit extends Cubit<ChatState> {
     final result = await chatFakeDetectionRepo.predictImage(image);
     result.when(
       success: (predictions) {
-        log(predictions.first.model.toString());
-        log(predictions.first.prediction.toString());
-        log(predictions.first.gradcamUrl.toString());
-        log(predictions.first.confidence.toString());
-        log(predictions.last.model.toString());
-        log(predictions.last.prediction.toString());
-        log(predictions.last.gradcamUrl.toString());
-        log(predictions.last.confidence.toString());
         // 3. Add API response message
         final apiMessage = ChatMessage(
           id: 'pred_${DateTime.now().millisecondsSinceEpoch}',
