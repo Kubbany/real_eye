@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:real_eye/Features/chat_fake_detection/domain/entities/image_prediction_entity.dart';
+import 'package:real_eye/Features/chat_fake_detection/presentation/widgets/clickable_url_text.dart';
+import 'package:real_eye/core/utils/methods/fix_url.dart';
 
 class ImagePredictionItem extends StatelessWidget {
   final ImagePredictionEntity prediction;
@@ -16,25 +18,11 @@ class ImagePredictionItem extends StatelessWidget {
           Text('Model: ${prediction.model}'),
           Text('Prediction: ${prediction.prediction}'),
           Text('Confidence: ${prediction.confidence}'),
-          TextButton(
-            onPressed: () => _viewGradCam(context, prediction.gradcamUrl),
-            child: const Text('View GradCAM'),
+          ClickableUrlText(
+            prefixText: "Gradcam URL: ",
+            url: fixLocalhostUrl(prediction.gradcamUrl),
           ),
         ],
-      ),
-    );
-  }
-
-  void _viewGradCam(BuildContext context, String url) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Scaffold(
-          appBar: AppBar(title: const Text('GradCAM Visualization')),
-          body: Center(
-            child: Image.network(url),
-          ),
-        ),
       ),
     );
   }
