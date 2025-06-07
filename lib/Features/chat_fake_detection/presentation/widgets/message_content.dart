@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:real_eye/Features/chat_fake_detection/data/models/message_model.dart';
@@ -32,14 +30,12 @@ class MessageContent extends StatelessWidget {
         return BlocBuilder<ChatCubit, ChatState>(
           builder: (context, state) {
             if (state is ChatMessagesUpdated) {
-              log("Success");
               return PredictionResponseContainer(message: message);
             } else if (state is ChatError) {
               return Center(
                 child: Text(state.errorMessage),
               );
             } else if (state is ChatLoading) {
-              log("Loading");
               return const Center(
                 child: Text(
                   "Processing",
