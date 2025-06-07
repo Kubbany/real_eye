@@ -10,7 +10,7 @@ part of 'flask_service.dart';
 
 class _FlaskService implements FlaskService {
   _FlaskService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'http://192.168.1.8:5000/';
+    baseUrl ??= 'http://192.168.1.14:5000/';
   }
 
   final Dio _dio;
@@ -27,7 +27,7 @@ class _FlaskService implements FlaskService {
     final _data = FormData();
     _data.files.add(
       MapEntry(
-        'image',
+        'file',
         MultipartFile.fromFileSync(
           image.path,
           filename: image.path.split(Platform.pathSeparator).last,
@@ -54,8 +54,7 @@ class _FlaskService implements FlaskService {
     try {
       _value = _result.data!
           .map(
-            (dynamic i) =>
-                ImagePredictionModel.fromJson(i as Map<String, dynamic>),
+            (dynamic i) => ImagePredictionModel.fromJson(i as Map<String, dynamic>),
           )
           .toList();
     } on Object catch (e, s) {
@@ -73,7 +72,7 @@ class _FlaskService implements FlaskService {
     final _data = FormData();
     _data.files.add(
       MapEntry(
-        'video',
+        'file',
         MultipartFile.fromFileSync(
           video.path,
           filename: video.path.split(Platform.pathSeparator).last,
@@ -100,8 +99,7 @@ class _FlaskService implements FlaskService {
     try {
       _value = _result.data!
           .map(
-            (dynamic i) =>
-                VideoPredictionModel.fromJson(i as Map<String, dynamic>),
+            (dynamic i) => VideoPredictionModel.fromJson(i as Map<String, dynamic>),
           )
           .toList();
     } on Object catch (e, s) {
@@ -135,8 +133,7 @@ class _FlaskService implements FlaskService {
     try {
       _value = _result.data!
           .map(
-            (dynamic i) =>
-                ImagePredictionModel.fromJson(i as Map<String, dynamic>),
+            (dynamic i) => ImagePredictionModel.fromJson(i as Map<String, dynamic>),
           )
           .toList();
     } on Object catch (e, s) {
@@ -148,8 +145,7 @@ class _FlaskService implements FlaskService {
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
-        !(requestOptions.responseType == ResponseType.bytes ||
-            requestOptions.responseType == ResponseType.stream)) {
+        !(requestOptions.responseType == ResponseType.bytes || requestOptions.responseType == ResponseType.stream)) {
       if (T == String) {
         requestOptions.responseType = ResponseType.plain;
       } else {

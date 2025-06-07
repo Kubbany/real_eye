@@ -51,8 +51,8 @@ class PredictionResults extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Model: ${prediction.model}'),
-                Text('Fake: ${prediction.fakePercentage.toStringAsFixed(2)}%'),
-                Text('Real: ${prediction.realPercentage.toStringAsFixed(2)}%'),
+                Text('Fake: ${prediction.fakePercentage?.toStringAsFixed(2)}%'),
+                Text('Real: ${prediction.realPercentage?.toStringAsFixed(2)}%'),
                 Text('Fake Frames: ${prediction.fakeFramesCount}'),
                 const Divider(height: 8),
               ],

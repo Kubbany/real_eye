@@ -3,19 +3,18 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:real_eye/Features/chat_fake_detection/data/models/message_model.dart';
-import 'package:real_eye/Features/chat_fake_detection/domain/entities/image_prediction_entity.dart';
-import 'package:real_eye/Features/chat_fake_detection/domain/entities/video_prediction_entity.dart';
 
-import 'package:real_eye/Features/chat_fake_detection/presentation/manager/cubits/chat_fake_detection_cubit/chat_fake_detection_cubit.dart';
+import 'package:real_eye/Features/chat_fake_detection/domain/repos/chat_fake_detection_repo.dart';
 import 'package:real_eye/core/extensions/safe_emit.dart';
+import 'package:real_eye/core/utils/result.dart';
 
 part 'chat_states.dart';
 
 class ChatCubit extends Cubit<ChatState> {
-  final ChatFakeDetectionCubit chatFakeDetectionCubit;
+  final ChatFakeDetectionRepo chatFakeDetectionRepo;
 
   ChatCubit({
-    required this.chatFakeDetectionCubit,
+    required this.chatFakeDetectionRepo,
   }) : super(ChatInitial());
 
   final List<ChatMessage> _messages = [];
@@ -43,12 +42,31 @@ class ChatCubit extends Cubit<ChatState> {
     );
     _messages.add(message);
     safeEmit(ChatMessagesUpdated(messages: List.from(_messages)));
+    final result = await chatFakeDetectionRepo.predictImage(image);
+    result.when(
+      success: (predictions) {
+        // 3. Add API response message
+        final apiMessage = ChatMessage(
+          id: 'pred_${DateTime.now().millisecondsSinceEpoch}',
+          type: MessageType.text,
+          content: _formatPredictions(predictions),
+          timestamp: DateTime.now(),
+          isUser: false,
+          imagePredictions: predictions,
+        );
+        _addMessage(apiMessage);
+      },
+      failure: (failure) {
+        safeEmit(ChatError(errorMessage: failure.errorMessage));
+      },
+    );
 
     // Get prediction
-    await chatFakeDetectionCubit.predictImage(image);
   }
 
+  // chat_cubit.dart
   Future<void> sendVideoMessage(File video) async {
+    // 1. Add user message immediately
     final message = ChatMessage(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       type: MessageType.video,
@@ -56,11 +74,36 @@ class ChatCubit extends Cubit<ChatState> {
       timestamp: DateTime.now(),
       isUser: true,
     );
-    _messages.add(message);
-    safeEmit(ChatMessagesUpdated(messages: List.from(_messages)));
+    _addMessage(message);
 
-    // Get prediction
-    await chatFakeDetectionCubit.predictVideo(video);
+    // 2. Get prediction
+    final result = await chatFakeDetectionRepo.predictVideo(video);
+
+    result.when(
+      success: (predictions) {
+        // 3. Add API response message
+        final apiMessage = ChatMessage(
+          id: 'pred_${DateTime.now().millisecondsSinceEpoch}',
+          type: MessageType.predictionResult,
+          timestamp: DateTime.now(),
+          isUser: false,
+          isPrediction: true,
+          videoPredictions: predictions,
+        );
+        _addMessage(apiMessage);
+      },
+      failure: (failure) {
+        // Add error message to chat
+        final errorMessage = ChatMessage(
+          id: 'err_${DateTime.now().millisecondsSinceEpoch}',
+          type: MessageType.text,
+          content: 'Analysis failed: ${failure.errorMessage}',
+          timestamp: DateTime.now(),
+          isUser: false,
+        );
+        _addMessage(errorMessage);
+      },
+    );
   }
 
   Future<void> sendImageUrlMessage(String url) async {
@@ -75,29 +118,32 @@ class ChatCubit extends Cubit<ChatState> {
     safeEmit(ChatMessagesUpdated(messages: List.from(_messages)));
 
     // Get prediction
-    await chatFakeDetectionCubit.predictFromUrl(url);
+    final result = await chatFakeDetectionRepo.predictFromUrl(url);
+    result.when(
+      success: (predictions) {
+        // 3. Add API response message
+        final apiMessage = ChatMessage(
+          id: 'pred_${DateTime.now().millisecondsSinceEpoch}',
+          type: MessageType.text,
+          content: _formatPredictions(predictions),
+          timestamp: DateTime.now(),
+          isUser: false,
+          imagePredictions: predictions,
+        );
+        _addMessage(apiMessage);
+      },
+      failure: (failure) {
+        safeEmit(ChatError(errorMessage: failure.errorMessage));
+      },
+    );
   }
 
-  void addPredictionResults({
-    List<ImagePredictionEntity>? imagePredictions,
-    List<VideoPredictionEntity>? videoPredictions,
-  }) {
-    if (_messages.isEmpty) return;
+  String _formatPredictions(predictions) {
+    return predictions.map((p) => '${p.model}: ${p.prediction} (${p.confidence})').join('\n');
+  }
 
-    final lastMessage = _messages.last;
-    final updatedMessage = ChatMessage(
-      id: lastMessage.id,
-      type: lastMessage.type,
-      content: lastMessage.content,
-      file: lastMessage.file,
-      url: lastMessage.url,
-      timestamp: lastMessage.timestamp,
-      isUser: lastMessage.isUser,
-      imagePredictions: imagePredictions,
-      videoPredictions: videoPredictions,
-    );
-
-    _messages[_messages.length - 1] = updatedMessage;
-    emit(ChatMessagesUpdated(messages: List.from(_messages)));
+  void _addMessage(ChatMessage message) {
+    _messages.add(message);
+    safeEmit(ChatMessagesUpdated(messages: List.from(_messages)));
   }
 }

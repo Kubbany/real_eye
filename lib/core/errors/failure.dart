@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -35,7 +34,6 @@ class ServerFailure extends Failure {
   factory ServerFailure.fromResponse(int statusCode, dynamic response) {
     if (statusCode == 404) {
       String message = "Request not found";
-      log(response['message']);
       if (response['message'] != message) {
         message = response['message'];
       }
@@ -59,6 +57,59 @@ class ErrorHandler {
       return ServerFailure.fromDioException(exception);
     } else if (exception is SocketException) {
       return const ServerFailure(errorMessage: "No Internet Connection.");
+    } else if (exception is String) {
+      return GeneralFailure(errorMessage: exception);
+    } else {
+      return GeneralFailure(errorMessage: " Unknown Error! Please Try Again.");
+    }
+  }
+}
+
+class FlaskFailure extends Failure {
+  const FlaskFailure({required super.errorMessage});
+
+  factory FlaskFailure.fromDioException(DioException e) {
+    switch (e.type) {
+      case DioExceptionType.connectionTimeout:
+        return const FlaskFailure(errorMessage: "Server Connection Timeout.");
+      case DioExceptionType.sendTimeout:
+        return const FlaskFailure(errorMessage: "Server Send Timeout.");
+      case DioExceptionType.receiveTimeout:
+        return const FlaskFailure(errorMessage: "Server Receive Timeout.");
+      case DioExceptionType.badCertificate:
+        return const FlaskFailure(errorMessage: "Server Bad Certificate.");
+      case DioExceptionType.badResponse:
+        return FlaskFailure.fromResponse(e.response!.statusCode!, e.response!.data);
+      case DioExceptionType.cancel:
+        return const FlaskFailure(errorMessage: "Request Canceled.");
+      case DioExceptionType.connectionError:
+        return const FlaskFailure(errorMessage: "No Internet Connection.");
+      case DioExceptionType.unknown:
+        return const FlaskFailure(errorMessage: "Unknown Error, Please Try Again Later.");
+    }
+  }
+  factory FlaskFailure.fromResponse(int statusCode, dynamic response) {
+    if (statusCode == 404) {
+      String message = "Request not found";
+      if (response['error'] != message) {
+        message = response['error'];
+      }
+      return FlaskFailure(errorMessage: message);
+    } else if (statusCode >= 500) {
+      return const FlaskFailure(errorMessage: "Internal Server Error, Please Try Again.");
+    } else if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
+      return FlaskFailure(errorMessage: response['error']);
+    }
+    return const FlaskFailure(errorMessage: "Unknown Error, Please Try Again Later.");
+  }
+}
+
+class FlaskHandler {
+  static Failure handle(dynamic exception) {
+    if (exception is DioException) {
+      return FlaskFailure.fromDioException(exception);
+    } else if (exception is SocketException) {
+      return const FlaskFailure(errorMessage: "No Internet Connection.");
     } else if (exception is String) {
       return GeneralFailure(errorMessage: exception);
     } else {

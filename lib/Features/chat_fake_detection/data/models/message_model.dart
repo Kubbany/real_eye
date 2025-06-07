@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:real_eye/Features/chat_fake_detection/domain/entities/image_prediction_entity.dart';
 import 'package:real_eye/Features/chat_fake_detection/domain/entities/video_prediction_entity.dart';
 
-enum MessageType { text, image, video, imageUrl }
+enum MessageType { text, image, video, imageUrl, predictionResult }
 
 class ChatMessage {
   final String id;
@@ -14,6 +14,7 @@ class ChatMessage {
   final String? url; // For image URLs
   final DateTime timestamp;
   final bool isUser;
+  final bool isPrediction;
   final List<ImagePredictionEntity>? imagePredictions;
   final List<VideoPredictionEntity>? videoPredictions;
 
@@ -25,6 +26,7 @@ class ChatMessage {
     this.url,
     required this.timestamp,
     required this.isUser,
+    this.isPrediction = false,
     this.imagePredictions,
     this.videoPredictions,
   });

@@ -8,20 +8,20 @@ import 'package:retrofit/retrofit.dart';
 
 part 'flask_service.g.dart';
 
-@RestApi(baseUrl: 'http://192.168.1.8:5000/')
+@RestApi(baseUrl: 'http://192.168.1.14:5000/')
 abstract class FlaskService {
   factory FlaskService(Dio dio, {String? baseUrl}) = _FlaskService;
 
-  @MultiPart()
   @POST('/predict')
+  @MultiPart()
   Future<List<ImagePredictionModel>> predictImage(
-    @Part() File image,
+    @Part(name: 'file') File image,
   );
 
   @MultiPart()
   @POST('/predict_video')
   Future<List<VideoPredictionModel>> predictVideo(
-    @Part() File video,
+    @Part(name: 'file') File video,
   );
 
   @POST('/predict_url')

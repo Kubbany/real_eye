@@ -24,7 +24,10 @@ class _MediaUploadTextFieldState extends State<MediaUploadTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      margin: const EdgeInsets.only(
+        top: 20,
+      ),
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: TextField(
         controller: _textController,

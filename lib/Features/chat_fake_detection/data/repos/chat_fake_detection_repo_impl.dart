@@ -19,9 +19,10 @@ class ChatFakeDetectionRepoImpl implements ChatFakeDetectionRepo {
   Future<Result<List<ImagePredictionEntity>>> predictImage(File image) async {
     try {
       final response = await flaskApi.predictImage(image);
+
       return Result.success(response.toDomain());
     } catch (e) {
-      return Result.fail(ErrorHandler.handle(e));
+      return Result.fail(FlaskHandler.handle(e));
     }
   }
 
@@ -31,7 +32,7 @@ class ChatFakeDetectionRepoImpl implements ChatFakeDetectionRepo {
       final response = await flaskApi.predictVideo(video);
       return Result.success(response.toDomain());
     } catch (e) {
-      return Result.fail(ErrorHandler.handle(e));
+      return Result.fail(FlaskHandler.handle(e));
     }
   }
 
@@ -43,7 +44,7 @@ class ChatFakeDetectionRepoImpl implements ChatFakeDetectionRepo {
       );
       return Result.success(response.toDomain());
     } catch (e) {
-      return Result.fail(ErrorHandler.handle(e));
+      return Result.fail(FlaskHandler.handle(e));
     }
   }
 }
