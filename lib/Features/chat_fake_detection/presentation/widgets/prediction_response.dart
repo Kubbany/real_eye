@@ -13,7 +13,6 @@ class PredictionResponseContainer extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 4),
       decoration: BoxDecoration(
-        color: Colors.grey[700],
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -21,9 +20,19 @@ class PredictionResponseContainer extends StatelessWidget {
         children: [
           const Text('Analysis Results:', style: TextStyle(fontWeight: FontWeight.bold)),
           if (message.imagePredictions != null)
-            ...message.imagePredictions!.map((prediction) => ImagePredictionItem(prediction: prediction)),
+            ...List.generate(
+              message.imagePredictions!.length * 2 - 1,
+              (index) => index.isEven
+                  ? ImagePredictionItem(prediction: message.imagePredictions![index ~/ 2])
+                  : Divider(height: 3, color: Colors.grey[700]),
+            ),
           if (message.videoPredictions != null)
-            ...message.videoPredictions!.map((prediction) => VideoPredictionItem(prediction: prediction)),
+            ...List.generate(
+              message.videoPredictions!.length * 2 - 1,
+              (index) => index.isEven
+                  ? VideoPredictionItem(prediction: message.videoPredictions![index ~/ 2])
+                  : Divider(height: 3, color: Colors.grey[700]),
+            ),
         ],
       ),
     );

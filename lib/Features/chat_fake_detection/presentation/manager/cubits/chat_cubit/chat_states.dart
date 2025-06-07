@@ -5,6 +5,8 @@ sealed class ChatState {}
 
 final class ChatInitial extends ChatState {}
 
+final class ChatLoading extends ChatState {}
+
 final class ChatMessagesUpdated extends ChatState {
   final List<ChatMessage> messages;
 

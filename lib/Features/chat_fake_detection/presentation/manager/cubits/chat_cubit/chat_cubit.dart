@@ -33,6 +33,7 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   Future<void> sendImageMessage(File image) async {
+    safeEmit(ChatLoading());
     final message = ChatMessage(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       type: MessageType.image,
@@ -66,6 +67,7 @@ class ChatCubit extends Cubit<ChatState> {
 
   // chat_cubit.dart
   Future<void> sendVideoMessage(File video) async {
+    safeEmit(ChatLoading());
     // 1. Add user message immediately
     final message = ChatMessage(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -107,6 +109,7 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   Future<void> sendImageUrlMessage(String url) async {
+    safeEmit(ChatLoading());
     final message = ChatMessage(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       type: MessageType.imageUrl,

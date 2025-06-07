@@ -1,13 +1,15 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:real_eye/core/utils/methods/luanch_custom_url.dart';
 
 class ClickableUrlText extends StatelessWidget {
-  final String? url;
+  final String url;
+  final String? prefixText;
 
   const ClickableUrlText({
     super.key,
     required this.url,
+    this.prefixText,
   });
 
   @override
@@ -15,19 +17,14 @@ class ClickableUrlText extends StatelessWidget {
     return Text.rich(
       TextSpan(
         children: [
-          const TextSpan(text: 'Fake Frames Zip: '),
+          if (prefixText != null) TextSpan(text: prefixText),
           TextSpan(
-            text: url != null ? Uri.parse(url!).host : 'Not available',
-            style: TextStyle(
-              color: url != null ? Colors.blue : Colors.grey,
-              decoration: url != null ? TextDecoration.underline : TextDecoration.none,
+            text: url,
+            style: const TextStyle(
+              color: Colors.blue,
+              decoration: TextDecoration.underline,
             ),
-            recognizer: url != null
-                ? (TapGestureRecognizer()
-                  ..onTap = () => launchUrl(
-                        Uri.parse(url!),
-                      ))
-                : null,
+            recognizer: TapGestureRecognizer()..onTap = () => luanchCustomUrl(context, url),
           ),
         ],
       ),

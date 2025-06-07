@@ -10,10 +10,10 @@ class UserMessageContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 4),
+      margin: const EdgeInsets.symmetric(vertical: 12),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey[700],
+        color: Colors.grey[900],
         borderRadius: BorderRadius.circular(12),
       ),
       child: MessageContent(message: message),
